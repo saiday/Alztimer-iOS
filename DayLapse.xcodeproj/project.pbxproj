@@ -1,0 +1,432 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83200F211D4D099C0057180B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83200F201D4D099C0057180B /* AppDelegate.swift */; };
+		83200F231D4D099C0057180B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83200F221D4D099C0057180B /* ViewController.swift */; };
+		83200F261D4D099D0057180B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83200F241D4D099D0057180B /* Main.storyboard */; };
+		83200F291D4D099D0057180B /* DayLapse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83200F271D4D099D0057180B /* DayLapse.xcdatamodeld */; };
+		83200F2B1D4D099D0057180B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83200F2A1D4D099D0057180B /* Assets.xcassets */; };
+		83200F2E1D4D099D0057180B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83200F2C1D4D099D0057180B /* LaunchScreen.storyboard */; };
+		83200F391D4D099D0057180B /* DayLapseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83200F381D4D099D0057180B /* DayLapseTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		83200F351D4D099D0057180B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83200F151D4D099C0057180B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 83200F1C1D4D099C0057180B;
+			remoteInfo = DayLapse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		83200F1D1D4D099C0057180B /* DayLapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayLapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		83200F201D4D099C0057180B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		83200F221D4D099C0057180B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		83200F251D4D099D0057180B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		83200F281D4D099D0057180B /* DayLapse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DayLapse.xcdatamodel; sourceTree = "<group>"; };
+		83200F2A1D4D099D0057180B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		83200F2D1D4D099D0057180B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		83200F2F1D4D099D0057180B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83200F341D4D099D0057180B /* DayLapseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DayLapseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83200F381D4D099D0057180B /* DayLapseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLapseTests.swift; sourceTree = "<group>"; };
+		83200F3A1D4D099D0057180B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83200F1A1D4D099C0057180B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83200F311D4D099D0057180B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83200F141D4D099C0057180B = {
+			isa = PBXGroup;
+			children = (
+				83200F1F1D4D099C0057180B /* DayLapse */,
+				83200F371D4D099D0057180B /* DayLapseTests */,
+				83200F1E1D4D099C0057180B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83200F1E1D4D099C0057180B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83200F1D1D4D099C0057180B /* DayLapse.app */,
+				83200F341D4D099D0057180B /* DayLapseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83200F1F1D4D099C0057180B /* DayLapse */ = {
+			isa = PBXGroup;
+			children = (
+				83200F201D4D099C0057180B /* AppDelegate.swift */,
+				83200F221D4D099C0057180B /* ViewController.swift */,
+				83200F241D4D099D0057180B /* Main.storyboard */,
+				83200F2A1D4D099D0057180B /* Assets.xcassets */,
+				83200F2C1D4D099D0057180B /* LaunchScreen.storyboard */,
+				83200F2F1D4D099D0057180B /* Info.plist */,
+				83200F271D4D099D0057180B /* DayLapse.xcdatamodeld */,
+			);
+			path = DayLapse;
+			sourceTree = "<group>";
+		};
+		83200F371D4D099D0057180B /* DayLapseTests */ = {
+			isa = PBXGroup;
+			children = (
+				83200F381D4D099D0057180B /* DayLapseTests.swift */,
+				83200F3A1D4D099D0057180B /* Info.plist */,
+			);
+			path = DayLapseTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		83200F1C1D4D099C0057180B /* DayLapse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83200F3D1D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapse" */;
+			buildPhases = (
+				83200F191D4D099C0057180B /* Sources */,
+				83200F1A1D4D099C0057180B /* Frameworks */,
+				83200F1B1D4D099C0057180B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DayLapse;
+			productName = DayLapse;
+			productReference = 83200F1D1D4D099C0057180B /* DayLapse.app */;
+			productType = "com.apple.product-type.application";
+		};
+		83200F331D4D099D0057180B /* DayLapseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83200F401D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapseTests" */;
+			buildPhases = (
+				83200F301D4D099D0057180B /* Sources */,
+				83200F311D4D099D0057180B /* Frameworks */,
+				83200F321D4D099D0057180B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				83200F361D4D099D0057180B /* PBXTargetDependency */,
+			);
+			name = DayLapseTests;
+			productName = DayLapseTests;
+			productReference = 83200F341D4D099D0057180B /* DayLapseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83200F151D4D099C0057180B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = saiday;
+				TargetAttributes = {
+					83200F1C1D4D099C0057180B = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					83200F331D4D099D0057180B = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 83200F1C1D4D099C0057180B;
+					};
+				};
+			};
+			buildConfigurationList = 83200F181D4D099C0057180B /* Build configuration list for PBXProject "DayLapse" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 83200F141D4D099C0057180B;
+			productRefGroup = 83200F1E1D4D099C0057180B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83200F1C1D4D099C0057180B /* DayLapse */,
+				83200F331D4D099D0057180B /* DayLapseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		83200F1B1D4D099C0057180B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83200F2E1D4D099D0057180B /* LaunchScreen.storyboard in Resources */,
+				83200F2B1D4D099D0057180B /* Assets.xcassets in Resources */,
+				83200F261D4D099D0057180B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83200F321D4D099D0057180B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83200F191D4D099C0057180B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83200F291D4D099D0057180B /* DayLapse.xcdatamodeld in Sources */,
+				83200F231D4D099C0057180B /* ViewController.swift in Sources */,
+				83200F211D4D099C0057180B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		83200F301D4D099D0057180B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83200F391D4D099D0057180B /* DayLapseTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		83200F361D4D099D0057180B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 83200F1C1D4D099C0057180B /* DayLapse */;
+			targetProxy = 83200F351D4D099D0057180B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		83200F241D4D099D0057180B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83200F251D4D099D0057180B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		83200F2C1D4D099D0057180B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83200F2D1D4D099D0057180B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		83200F3B1D4D099D0057180B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		83200F3C1D4D099D0057180B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		83200F3E1D4D099D0057180B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DayLapse/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.DayLapse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		83200F3F1D4D099D0057180B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DayLapse/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.DayLapse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		83200F411D4D099D0057180B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DayLapseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.DayLapseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DayLapse.app/DayLapse";
+			};
+			name = Debug;
+		};
+		83200F421D4D099D0057180B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DayLapseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.DayLapseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DayLapse.app/DayLapse";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83200F181D4D099C0057180B /* Build configuration list for PBXProject "DayLapse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83200F3B1D4D099D0057180B /* Debug */,
+				83200F3C1D4D099D0057180B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83200F3D1D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83200F3E1D4D099D0057180B /* Debug */,
+				83200F3F1D4D099D0057180B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		83200F401D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83200F411D4D099D0057180B /* Debug */,
+				83200F421D4D099D0057180B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		83200F271D4D099D0057180B /* DayLapse.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				83200F281D4D099D0057180B /* DayLapse.xcdatamodel */,
+			);
+			currentVersion = 83200F281D4D099D0057180B /* DayLapse.xcdatamodel */;
+			path = DayLapse.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 83200F151D4D099C0057180B /* Project object */;
+}
