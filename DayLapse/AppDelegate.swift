@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: - Core Data stack
-    // TODO: some iOS 10
+    // TODO: some iOS 10+ API
 //    lazy var persistentContainer: NSPersistentContainer = {
 //        /*
 //         The persistent container for the application. This implementation
