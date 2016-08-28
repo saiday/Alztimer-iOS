@@ -22,7 +22,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         
-        let overlayView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 320))
+        let screenWidth = UIScreen.main().bounds.size.width
+        let cameraPreviewRatio: CGFloat = 4.0 / 3.0
+        let overlayView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth * cameraPreviewRatio))
         let blueColor = UIColor.init(red: 255, green: 255, blue: 0, alpha: 0.5)
         overlayView.backgroundColor = blueColor
         overlayView.layer.isOpaque = false
@@ -56,7 +58,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func shotButtonTapped() {
         self.imagePickerController.delegate = self
-        
         self.present(self.imagePickerController, animated: true, completion: nil)
     }
     
