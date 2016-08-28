@@ -13,6 +13,7 @@
 		83200F2B1D4D099D0057180B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83200F2A1D4D099D0057180B /* Assets.xcassets */; };
 		83200F2E1D4D099D0057180B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83200F2C1D4D099D0057180B /* LaunchScreen.storyboard */; };
 		83200F391D4D099D0057180B /* DayLapseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83200F381D4D099D0057180B /* DayLapseTests.swift */; };
+		85556263DB11702C305EF086 /* Pods_DayLapse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +27,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49963C8B261EA40F3F5E577E /* Pods-DayLapse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.release.xcconfig"; sourceTree = "<group>"; };
+		4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DayLapse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83200F1D1D4D099C0057180B /* DayLapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayLapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83200F201D4D099C0057180B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83200F221D4D099C0057180B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +39,8 @@
 		83200F341D4D099D0057180B /* DayLapseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DayLapseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83200F381D4D099D0057180B /* DayLapseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLapseTests.swift; sourceTree = "<group>"; };
 		83200F3A1D4D099D0057180B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83C40BC11D53BDC9004EED15 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/Mac/PureLayout.framework; sourceTree = "<group>"; };
+		A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85556263DB11702C305EF086 /* Pods_DayLapse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +62,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D624F28CAA8A3838AA3404B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */,
+				49963C8B261EA40F3F5E577E /* Pods-DayLapse.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		83200F141D4D099C0057180B = {
 			isa = PBXGroup;
 			children = (
 				83200F1F1D4D099C0057180B /* DayLapse */,
 				83200F371D4D099D0057180B /* DayLapseTests */,
 				83200F1E1D4D099C0057180B /* Products */,
+				83C40BC01D53BDC9004EED15 /* Frameworks */,
+				2D624F28CAA8A3838AA3404B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +113,15 @@
 			path = DayLapseTests;
 			sourceTree = "<group>";
 		};
+		83C40BC01D53BDC9004EED15 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83C40BC11D53BDC9004EED15 /* PureLayout.framework */,
+				4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,10 +129,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83200F3D1D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapse" */;
 			buildPhases = (
+				C0C8DBCECE1F3AB3AD54BB67 /* Check Pods Manifest.lock */,
 				83200F191D4D099C0057180B /* Sources */,
 				83200F1A1D4D099C0057180B /* Frameworks */,
 				83200F1B1D4D099C0057180B /* Resources */,
 				83006D791D4E683F00920608 /* Treat TODO: and FIXME: as warnings */,
+				DE2881A0108CB086B1D56476 /* Embed Pods Frameworks */,
+				0E56977F27AC4F2550A69043 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,6 +226,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0E56977F27AC4F2550A69043 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		83006D791D4E683F00920608 /* Treat TODO: and FIXME: as warnings */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,6 +254,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
+		};
+		C0C8DBCECE1F3AB3AD54BB67 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DE2881A0108CB086B1D56476 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -345,8 +419,10 @@
 		};
 		83200F3E1D4D099D0057180B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DayLapse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.daylapse;
@@ -357,8 +433,10 @@
 		};
 		83200F3F1D4D099D0057180B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49963C8B261EA40F3F5E577E /* Pods-DayLapse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DayLapse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.daylapse;

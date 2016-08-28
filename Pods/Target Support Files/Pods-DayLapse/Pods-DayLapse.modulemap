@@ -1,0 +1,6 @@
+framework module Pods_DayLapse {
+  umbrella header "Pods-DayLapse-umbrella.h"
+
+  export *
+  module * { export * }
+}
