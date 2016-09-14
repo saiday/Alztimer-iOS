@@ -22,15 +22,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         
-        let screenWidth = UIScreen.main().bounds.size.width
+        let screenWidth = UIScreen.main.bounds.size.width
         let cameraPreviewRatio: CGFloat = 4.0 / 3.0
-        let overlayView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenWidth * cameraPreviewRatio))
+        
+        var y: CGFloat = 0
+        if ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 0, patchVersion: 0)) {
+            y = 44
+        }
+        let overlayView = UIView(frame: CGRect(x: 0, y: y, width: screenWidth, height: screenWidth * cameraPreviewRatio))
         let blueColor = UIColor.init(red: 255, green: 255, blue: 0, alpha: 0.5)
         overlayView.backgroundColor = blueColor
         overlayView.layer.isOpaque = false
         overlayView.isOpaque = false
         
-        imagePickerController.showsCameraControls = false
+        imagePickerController.showsCameraControls = true
         imagePickerController.cameraOverlayView = overlayView
         
         return imagePickerController
@@ -51,7 +56,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func initCustomViews() {
-        view.backgroundColor = UIColor.white()
+        view.backgroundColor = UIColor.white
         
         self.shotButton.addTarget(self, action: #selector(self.shotButtonTapped), for: .touchUpInside)
     }
