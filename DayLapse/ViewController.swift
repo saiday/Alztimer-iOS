@@ -22,21 +22,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         
-        let screenWidth = UIScreen.main.bounds.size.width
-        let cameraPreviewRatio: CGFloat = 4.0 / 3.0
         
-        var y: CGFloat = 0
-        if ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 10, minorVersion: 0, patchVersion: 0)) {
-            y = 44
-        }
-        let overlayView = UIView(frame: CGRect(x: 0, y: y, width: screenWidth, height: screenWidth * cameraPreviewRatio))
-        let blueColor = UIColor.init(red: 255, green: 255, blue: 0, alpha: 0.5)
-        overlayView.backgroundColor = blueColor
-        overlayView.layer.isOpaque = false
-        overlayView.isOpaque = false
-        
-        imagePickerController.showsCameraControls = true
-        imagePickerController.cameraOverlayView = overlayView
+        imagePickerController.showsCameraControls = false
+        imagePickerController.cameraOverlayView = CameraOverlayView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
         
         return imagePickerController
     }()
@@ -44,7 +32,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupSubviews()
         initCustomViews()
     }
@@ -66,5 +53,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.present(self.imagePickerController, animated: true, completion: nil)
     }
     
+    // MARK: ImagePickerControllerDelegate
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print(info)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("cancled")
+    }
 }
 
+// draw a new set of controls
+// when user press shot, remove overlay view (cannot do this, confirmed)
+// when use photo pressed, save it to disk (create identity folder)
+// fetch last photo on folder

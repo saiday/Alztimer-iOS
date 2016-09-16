@@ -13,6 +13,7 @@
 		83200F2B1D4D099D0057180B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83200F2A1D4D099D0057180B /* Assets.xcassets */; };
 		83200F2E1D4D099D0057180B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83200F2C1D4D099D0057180B /* LaunchScreen.storyboard */; };
 		83200F391D4D099D0057180B /* DayLapseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83200F381D4D099D0057180B /* DayLapseTests.swift */; };
+		834C41CC1D8C6A5000547FB1 /* CameraOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C41CB1D8C6A5000547FB1 /* CameraOverlayView.swift */; };
 		85556263DB11702C305EF086 /* Pods_DayLapse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		83200F341D4D099D0057180B /* DayLapseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DayLapseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83200F381D4D099D0057180B /* DayLapseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLapseTests.swift; sourceTree = "<group>"; };
 		83200F3A1D4D099D0057180B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		834C41CB1D8C6A5000547FB1 /* CameraOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraOverlayView.swift; sourceTree = "<group>"; };
 		83C40BC11D53BDC9004EED15 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/Mac/PureLayout.framework; sourceTree = "<group>"; };
 		A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 		83200F1F1D4D099C0057180B /* DayLapse */ = {
 			isa = PBXGroup;
 			children = (
+				834C41C81D8C6A0100547FB1 /* Views */,
 				83200F201D4D099C0057180B /* AppDelegate.swift */,
 				83200F221D4D099C0057180B /* ViewController.swift */,
 				83200F2A1D4D099D0057180B /* Assets.xcassets */,
@@ -111,6 +114,14 @@
 				83200F3A1D4D099D0057180B /* Info.plist */,
 			);
 			path = DayLapseTests;
+			sourceTree = "<group>";
+		};
+		834C41C81D8C6A0100547FB1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				834C41CB1D8C6A5000547FB1 /* CameraOverlayView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		83C40BC01D53BDC9004EED15 /* Frameworks */ = {
@@ -292,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834C41CC1D8C6A5000547FB1 /* CameraOverlayView.swift in Sources */,
 				83200F291D4D099D0057180B /* DayLapse.xcdatamodeld in Sources */,
 				83200F231D4D099C0057180B /* ViewController.swift in Sources */,
 				83200F211D4D099C0057180B /* AppDelegate.swift in Sources */,
@@ -343,8 +355,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -366,7 +380,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -391,8 +405,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -408,7 +424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
