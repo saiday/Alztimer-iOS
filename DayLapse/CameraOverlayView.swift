@@ -9,6 +9,8 @@
 import UIKit
 
 import PureLayout
+import RxSwift
+import RxCocoa
 
 class CameraOverlayView: UIView {
     weak var overlayView: UIView!
@@ -19,10 +21,18 @@ class CameraOverlayView: UIView {
         super.init(frame: frame)
         setupSubviews()
         initCustomViews()
+        setupBindings()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupBindings() {
+        _ = overlayView.rx.observe(Bool.self, #keyPath(UIView.hidden)).subscribe(onNext: { [unowned self] (isHidden) in
+            self.previewButton.isSelected = isHidden!
+            })
+        overlayView.rx.observe(Bool.self, #keyPath(UIView.hidden)).subscribe(onNext: <#T##((Bool?) -> Void)?##((Bool?) -> Void)?##(Bool?) -> Void#>, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
     }
     
     func setupSubviews() {
@@ -71,7 +81,6 @@ class CameraOverlayView: UIView {
     }
     
     func previewTapped() {
-        previewButton.isSelected = !previewButton.isSelected
-        overlayView.isHidden = previewButton.isSelected
+        overlayView.isHidden = !overlayView.isHidden
     }
 }
