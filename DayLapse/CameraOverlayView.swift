@@ -32,7 +32,6 @@ class CameraOverlayView: UIView {
         _ = overlayView.rx.observe(Bool.self, #keyPath(UIView.hidden)).subscribe(onNext: { [unowned self] (isHidden) in
             self.previewButton.isSelected = isHidden!
             })
-        overlayView.rx.observe(Bool.self, #keyPath(UIView.hidden)).subscribe(onNext: <#T##((Bool?) -> Void)?##((Bool?) -> Void)?##(Bool?) -> Void#>, onError: <#T##((Error) -> Void)?##((Error) -> Void)?##(Error) -> Void#>, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
     }
     
     func setupSubviews() {
