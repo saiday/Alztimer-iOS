@@ -17,6 +17,7 @@ class CameraOverlayView: UIView {
     weak var shotButton: UIButton!
     weak var previewButton: UIButton!
     weak var cancelButton: UIButton!
+    weak var imagePickerController: UIImagePickerController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,6 +67,13 @@ class CameraOverlayView: UIView {
         previewButton.autoAlignAxis(toSuperviewAxis: .horizontal)
         previewButton.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
         self.previewButton = previewButton
+        
+        let cancelButton = UIButton(type: .system)
+        cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
+        controlsView.addSubview(cancelButton)
+        cancelButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+        cancelButton.autoPinEdge(toSuperviewEdge: .left, withInset: 20)
+        self.cancelButton = cancelButton
     }
     
     func initCustomViews() {
@@ -74,13 +82,23 @@ class CameraOverlayView: UIView {
 
         shotButton.addTarget(self, action: #selector(shotTapped), for: .touchUpInside)
         previewButton.addTarget(self, action: #selector(previewTapped), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
     }
     
     func shotTapped() {
         overlayView.isHidden = true
+        if let picker = imagePickerController {
+            picker.takePicture()
+        }
     }
     
     func previewTapped() {
         overlayView.isHidden = !overlayView.isHidden
+    }
+    
+    func cancelTapped() {
+        if let picker = imagePickerController {
+            picker.dismiss(animated: true, completion: nil)
+        }
     }
 }

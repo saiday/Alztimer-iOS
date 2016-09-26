@@ -21,10 +21,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     lazy var imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
-        
-        
         imagePickerController.showsCameraControls = false
-        imagePickerController.cameraOverlayView = CameraOverlayView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+        let cameraOverlayView = CameraOverlayView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+        cameraOverlayView.imagePickerController = imagePickerController
+        imagePickerController.cameraOverlayView = cameraOverlayView
         
         return imagePickerController
     }()
