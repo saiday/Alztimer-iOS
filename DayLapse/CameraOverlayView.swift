@@ -15,7 +15,8 @@ import RxCocoa
 class CameraOverlayView: UIView {
     weak var overlayView: UIView!
     weak var shotButton: UIButton!
-    weak var previewButton:UIButton!
+    weak var previewButton: UIButton!
+    weak var cancelButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

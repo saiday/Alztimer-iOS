@@ -28,7 +28,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         return imagePickerController
     }()
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +53,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: ImagePickerControllerDelegate
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         print(info)
     }
     
