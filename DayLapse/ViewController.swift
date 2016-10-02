@@ -10,6 +10,8 @@ import UIKit
 
 import PureLayout
 
+import Photos
+
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     // MARK: Views
     lazy var shotButton: UIButton = {
@@ -55,14 +57,67 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // MARK: ImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         print(info)
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        if hasPhotosAuthorized() {
+            dayLapseAlbum(albumFound: { (album) in
+                PHPhotoLibrary.shared().performChanges({
+                    let request = PHAssetChangeRequest.creationRequestForAsset(from: image)
+                    reques
+                    }, completionHandler: { (success, error) in
+                        
+                })
+            })
+        } else {
+            let alert = UIAlertController(title: NSLocalizedString("We need your permission to accss photo library", comment: ""), message: "", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("cancled")
     }
+    
+    func hasPhotosAuthorized() -> Bool {
+        let status = PHPhotoLibrary.authorizationStatus()
+        return status == .authorized
+    }
+    
+    func isDaylapseAlbumCreated() -> Bool {
+        let userCollections = PHCollectionList.fetchTopLevelUserCollections(with: nil)
+        for i in 0 ..< userCollections.count {
+            let userAlbum = userCollections.object(at: i)
+            if userAlbum.localizedTitle == CUSTOM_ALBUM_NAME {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func dayLapseAlbum(albumFound: @escaping (PHAssetCollection) -> Void) {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", CUSTOM_ALBUM_NAME)
+        let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        
+        if let album = collection.firstObject {
+            albumFound(album)
+        } else {
+            //If not found - Then create a new album
+            var assetCollectionPlaceholder: PHObjectPlaceholder
+            PHPhotoLibrary.shared().performChanges({
+                let createAlbumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: CUSTOM_ALBUM_NAME)
+                assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
+                }, completionHandler: { success, error in
+                    
+                    if (success) {
+                        let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [assetCollectionPlaceholder.localIdentifier], options: nil)
+                        print(collectionFetchResult)
+                        albumFound(collectionFetchResult.firstObject!)
+                    }
+            })
+        }
+    }
 }
 
-// draw a new set of controls
-// when user press shot, remove overlay view (cannot do this, confirmed)
 // when use photo pressed, save it to disk (create identity folder)
 // fetch last photo on folder
