@@ -40,7 +40,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func setupSubviews() {
         view.addSubview(self.shotButton)
         self.shotButton.autoCenterInSuperview()
-        
     }
     
     func initCustomViews() {
@@ -58,18 +57,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         print(info)
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        if hasPhotosAuthorized() {
-            dayLapseAlbum(albumFound: { (album) in
-                PHPhotoLibrary.shared().performChanges({
-                    let request = PHAssetChangeRequest.creationRequestForAsset(from: image)
-                    reques
-                    }, completionHandler: { (success, error) in
-                        
+        photosAuthorizedStatus { [unowned self] (authorized) in
+            if authorized {
+                self.accessDayLapseAlbum(albumFound: { (album) in
+                    PHPhotoLibrary.shared().performChanges({
+                        let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+                        let placeholder = assetRequest.placeholderForCreatedAsset
+                        let photosAsset = PHAsset.fetchAssets(in: album, options: nil)
+                        let albumChangeRequest = PHAssetCollectionChangeRequest(for: album, assets: photosAsset)
+                        let assets: NSArray = [placeholder!]
+                        albumChangeRequest!.addAssets(assets)
+                        }, completionHandler: { (success, error) in
+                    })
                 })
-            })
-        } else {
-            let alert = UIAlertController(title: NSLocalizedString("We need your permission to accss photo library", comment: ""), message: "", preferredStyle: .alert)
-            self.present(alert, animated: true, completion: nil)
+            } else {
+                print("no permission mdfk")
+                // TODO: this alert is persist on screen, bad UX
+                self.imagePickerController.dismiss(animated: true, completion: { [unowned self] in
+                    let alert = UIAlertController(title: NSLocalizedString("We need your permission to accss photo library", comment: ""), message: "", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
+                })
+            }
         }
     }
     
@@ -77,24 +85,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         print("cancled")
     }
     
-    func hasPhotosAuthorized() -> Bool {
+    func photosAuthorizedStatus(completion: @escaping (Bool) -> Void) -> Void {
         let status = PHPhotoLibrary.authorizationStatus()
-        return status == .authorized
-    }
-    
-    func isDaylapseAlbumCreated() -> Bool {
-        let userCollections = PHCollectionList.fetchTopLevelUserCollections(with: nil)
-        for i in 0 ..< userCollections.count {
-            let userAlbum = userCollections.object(at: i)
-            if userAlbum.localizedTitle == CUSTOM_ALBUM_NAME {
-                return true
-            }
+        if status == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                completion(status == .authorized)
+            })
+        } else {
+            completion(status == .authorized)
         }
-        
-        return false
     }
     
-    func dayLapseAlbum(albumFound: @escaping (PHAssetCollection) -> Void) {
+    func accessDayLapseAlbum(albumFound: @escaping (PHAssetCollection) -> Void) {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "title = %@", CUSTOM_ALBUM_NAME)
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
@@ -103,12 +105,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             albumFound(album)
         } else {
             //If not found - Then create a new album
-            var assetCollectionPlaceholder: PHObjectPlaceholder
+            var assetCollectionPlaceholder = PHObjectPlaceholder()
             PHPhotoLibrary.shared().performChanges({
                 let createAlbumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: CUSTOM_ALBUM_NAME)
                 assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
                 }, completionHandler: { success, error in
-                    
                     if (success) {
                         let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [assetCollectionPlaceholder.localIdentifier], options: nil)
                         print(collectionFetchResult)
@@ -119,5 +120,4 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 }
 
-// when use photo pressed, save it to disk (create identity folder)
 // fetch last photo on folder
