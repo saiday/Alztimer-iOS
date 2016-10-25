@@ -26,12 +26,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(forAutoLayout: ())
-        stackView.alignment = .fill
-        // TODO: try try look
-//        stackView.axis = UILayoutConstraintAxisVertical;
-//        stackView.distribution = UIStackViewDistributionEqualSpacing;
-//        stackView.alignment = UIStackViewAlignmentCenter;
-//        stackView.spacing = 30;
+        stackView.axis = .vertical
+//        stackView.distribution = .equalSpacing
+//        stackView.alignment = .center
+        stackView.spacing = 30;
         return stackView
     }()
 
@@ -57,8 +55,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let view1 = UIView()
         view1.backgroundColor = UIColor.blue
         
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "this is a fucking testthis is a fucking testthis is a fucking testthis is a fucking test"
+        
+        let button = UIButton(type: .system)
+        button.setTitle("test", for: .normal)
+
+        
         stackView.addArrangedSubview(createCollectionView)
-        stackView.addArrangedSubview(view1)
+        stackView.addArrangedSubview(button)
     }
     
     func createColllectionDidTapped() {
@@ -70,7 +76,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         print(info)
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        photosAuthorizedStatus { [unowned self] (authorized) in
+        photosAuthorizedStatus { [unowned self](authorized) in
             if authorized {
                 self.savePhoto(image: image) { (error) in
                     if let err = error {
