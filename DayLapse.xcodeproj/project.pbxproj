@@ -17,6 +17,8 @@
 		834C41CE1D9AEBC600547FB1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834C41CD1D9AEBC600547FB1 /* Photos.framework */; };
 		834C41D01D9AF1DD00547FB1 /* Atlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C41CF1D9AF1DD00547FB1 /* Atlas.swift */; };
 		834C41D21DAAC00600547FB1 /* CreateCollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C41D11DAAC00600547FB1 /* CreateCollectionColumn.swift */; };
+		834C42051DC43B7800547FB1 /* StackElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C42041DC43B7800547FB1 /* StackElement.swift */; };
+		83B6C2DD1DD2572200221604 /* CurrentAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6C2DC1DD2572200221604 /* CurrentAlbum.swift */; };
 		85556263DB11702C305EF086 /* Pods_DayLapse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,8 @@
 		834C41CD1D9AEBC600547FB1 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		834C41CF1D9AF1DD00547FB1 /* Atlas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atlas.swift; sourceTree = "<group>"; };
 		834C41D11DAAC00600547FB1 /* CreateCollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCollectionColumn.swift; sourceTree = "<group>"; };
+		834C42041DC43B7800547FB1 /* StackElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackElement.swift; sourceTree = "<group>"; };
+		83B6C2DC1DD2572200221604 /* CurrentAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentAlbum.swift; sourceTree = "<group>"; };
 		83C40BC11D53BDC9004EED15 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/Mac/PureLayout.framework; sourceTree = "<group>"; };
 		A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +111,7 @@
 				83200F201D4D099C0057180B /* AppDelegate.swift */,
 				83200F221D4D099C0057180B /* ViewController.swift */,
 				834C41CF1D9AF1DD00547FB1 /* Atlas.swift */,
+				83B6C2DC1DD2572200221604 /* CurrentAlbum.swift */,
 				83200F2A1D4D099D0057180B /* Assets.xcassets */,
 				83200F2C1D4D099D0057180B /* LaunchScreen.storyboard */,
 				83200F2F1D4D099D0057180B /* Info.plist */,
@@ -129,6 +134,7 @@
 			children = (
 				834C41CB1D8C6A5000547FB1 /* CameraOverlayView.swift */,
 				834C41D11DAAC00600547FB1 /* CreateCollectionColumn.swift */,
+				834C42041DC43B7800547FB1 /* StackElement.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -329,11 +335,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				834C41D01D9AF1DD00547FB1 /* Atlas.swift in Sources */,
+				83B6C2DD1DD2572200221604 /* CurrentAlbum.swift in Sources */,
 				834C41CC1D8C6A5000547FB1 /* CameraOverlayView.swift in Sources */,
 				83200F291D4D099D0057180B /* DayLapse.xcdatamodeld in Sources */,
 				834C41D21DAAC00600547FB1 /* CreateCollectionColumn.swift in Sources */,
 				83200F231D4D099C0057180B /* ViewController.swift in Sources */,
 				83200F211D4D099C0057180B /* AppDelegate.swift in Sources */,
+				834C42051DC43B7800547FB1 /* StackElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

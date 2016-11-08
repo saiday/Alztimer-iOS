@@ -13,6 +13,14 @@ import PureLayout
 import Photos
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate {
+    var currentAlbum: CurrentAlbum = .none
+    lazy var createCollectionView: UIView = { [unowned self] in
+        let view = CreateCollectionColumn()
+        view.delegate = self
+        
+        return view
+    }()
+    
     lazy var imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
@@ -40,17 +48,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func setupSubviews() {
-        view.addSubview(stackView)
+        let scrollView = UIScrollView(forAutoLayout: ())
+        view.addSubview(scrollView)
+        scrollView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
+        
+        stackView.backgroundColor = UIColor.black
+        scrollView.addSubview(stackView)
         stackView.autoCenterInSuperview()
-        stackView.autoMatch(.width, to: .width, of: view)
-        stackView.autoMatch(.height, to: .height, of: view)
+        stackView.autoMatch(.width, to: .width, of: scrollView)
+        stackView.autoMatch(.height, to: .height, of: scrollView)
+        
+        view.addSubview(createCollectionView)
+        createCollectionView.autoSetDimension(.height, toSize: 50)
+        createCollectionView.autoPinEdge(.top, to: .bottom, of: scrollView)
+        createCollectionView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
     }
     
     func initCustomViews() {
         view.backgroundColor = UIColor.white
-        
-        let createCollectionView = CreateCollectionColumn()
-        createCollectionView.delegate = self
         
         let view1 = UIView()
         view1.backgroundColor = UIColor.blue
@@ -61,15 +76,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let button = UIButton(type: .system)
         button.setTitle("test", for: .normal)
-
         
-        stackView.addArrangedSubview(createCollectionView)
+        // TODO: existing albums
+
         stackView.addArrangedSubview(button)
+        stackView.addArrangedSubview(view1)
+        stackView.addArrangedSubview(label)
     }
     
     func createColllectionDidTapped() {
-        self.imagePickerController.delegate = self
-        self.present(self.imagePickerController, animated: true, completion: nil)
+        let alert = UIAlertController(title: "New Collection", message: "name?", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "Collection name"
+        }
+        let submitAction = UIAlertAction(title: "OK", style: .default) { [unowned self](action) in
+            let text = alert.textFields?.first?.text
+            if let name = text, name.characters.count > 0 {
+                self.currentAlbum = .album(name: name, photosCount: 0, lastModified: NSDate())
+                self.imagePickerController.delegate = self
+                self.present(self.imagePickerController, animated: true, completion: nil)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(submitAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: ImagePickerControllerDelegate
@@ -126,7 +157,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func accessDayLapseAlbum(albumFound: @escaping (PHAssetCollection) -> Void) {
         let fetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "title = %@", CUSTOM_ALBUM_NAME)
+        fetchOptions.predicate = NSPredicate(format: "title = %@", kCUSTOM_ALBUM_NAME)
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
         if let album = collection.firstObject {
@@ -135,7 +166,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             // If not found, create new album
             var assetCollectionPlaceholder = PHObjectPlaceholder()
             PHPhotoLibrary.shared().performChanges({
-                let createAlbumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: CUSTOM_ALBUM_NAME)
+                let createAlbumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: kCUSTOM_ALBUM_NAME)
                 assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
                 }, completionHandler: { success, error in
                     if (success) {

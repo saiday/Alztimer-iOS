@@ -8,4 +8,4 @@
 
 import Foundation
 
-public let CUSTOM_ALBUM_NAME = "DayLapse"
+public let kCUSTOM_ALBUM_NAME = "DayLapse"
