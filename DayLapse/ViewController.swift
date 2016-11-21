@@ -84,6 +84,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         stackView.addArrangedSubview(label)
     }
     
+    // MARK: CreateCollectionColumnDelegate
     func createColllectionDidTapped() {
         let alert = UIAlertController(title: "New Collection", message: "name?", preferredStyle: .alert)
         alert.addTextField { (textField) in
@@ -143,8 +144,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             PHPhotoLibrary.shared().performChanges({
                 let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
                 let placeholder = assetRequest.placeholderForCreatedAsset
-                let photosAsset = PHAsset.fetchAssets(in: album, options: nil)
-                let albumChangeRequest = PHAssetCollectionChangeRequest(for: album, assets: photosAsset)
+                let albumChangeRequest = PHAssetCollectionChangeRequest(for: album)
                 let assets: NSArray = [placeholder!]
                 albumChangeRequest!.addAssets(assets)
                 }, completionHandler: { (success, error) in
@@ -157,7 +157,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func accessDayLapseAlbum(albumFound: @escaping (PHAssetCollection) -> Void) {
         let fetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate(format: "title = %@", kCUSTOM_ALBUM_NAME)
+        let albumName = kCUSTOM_ALBUM_NAME + "-" + self.currentAlbum.getName()
+        let predicate = NSPredicate(format: "title = %@", albumName)
+        fetchOptions.predicate = predicate
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
         if let album = collection.firstObject {
@@ -166,7 +168,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             // If not found, create new album
             var assetCollectionPlaceholder = PHObjectPlaceholder()
             PHPhotoLibrary.shared().performChanges({
-                let createAlbumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: kCUSTOM_ALBUM_NAME)
+                let createAlbumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName)
                 assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
                 }, completionHandler: { success, error in
                     if (success) {
