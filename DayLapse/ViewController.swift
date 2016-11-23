@@ -40,6 +40,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         stackView.spacing = 30;
         return stackView
     }()
+    
+    lazy var navigationBar: UINavigationBar = {
+        let navigationBar = UINavigationBar(forAutoLayout: ())
+        navigationBar.autoSetDimension(.height, toSize: 64)
+        navigationBar.topItem?.title = "Test"
+        return navigationBar
+    }()
+    
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView(forAutoLayout: ())
+        scrollView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        return scrollView;
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +61,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func setupSubviews() {
-        let scrollView = UIScrollView(forAutoLayout: ())
+        view.addSubview(navigationBar)
+        navigationBar.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
+        
         view.addSubview(scrollView)
         scrollView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
         
         stackView.backgroundColor = UIColor.black
         scrollView.addSubview(stackView)
-        stackView.autoCenterInSuperview()
+        stackView.autoPinEdgesToSuperviewEdges(with: .zero)
         stackView.autoMatch(.width, to: .width, of: scrollView)
         stackView.autoMatch(.height, to: .height, of: scrollView)
         
