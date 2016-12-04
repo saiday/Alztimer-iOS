@@ -13,7 +13,7 @@ import PureLayout
 import Photos
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate {
-    var currentAlbum: CurrentAlbum = .none
+    var currentAlbum: Album?
     lazy var createCollectionView: UIView = { [unowned self] in
         let view = CreateCollectionColumn()
         view.delegate = self
@@ -53,6 +53,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scrollView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         return scrollView;
     }()
+    
+    // MARK: entry point
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +99,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         stackView.addArrangedSubview(button)
         stackView.addArrangedSubview(view1)
         stackView.addArrangedSubview(label)
+        
+        listAlbums(queryExistAlbums())
+    }
+    
+    func queryExistAlbums() -> [Album] {
+        let fetchOptions = PHFetchOptions()
+        let albumName = kCUSTOM_ALBUM_NAME + "-"
+        let predicate = NSPredicate(format: "title BEGINSWITH[c] %@", albumName)
+        fetchOptions.predicate = predicate
+        let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        
+        var albums: [Album] = []
+        collection.enumerateObjects({ (albumAsset, start, stop) in
+            let album = Album.existingAlbum(name: albumAsset.localizedTitle!, photosCount: albumAsset.estimatedAssetCount, lastModified: albumAsset.endDate ?? Date())
+            albums.append(album)
+        })
+        
+        return albums
+    }
+    
+    func listAlbums(_ albums: [Album]) {
+        for album in albums {
+            let view = UILabel(forAutoLayout: ()) // fake
+            view.text = album.getName()
+            stackView.addArrangedSubview(view)
+            // TODO: UI to stack view
+        }
+        
     }
     
     // MARK: CreateCollectionColumnDelegate
@@ -108,7 +138,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let submitAction = UIAlertAction(title: "OK", style: .default) { [unowned self](action) in
             let text = alert.textFields?.first?.text
             if let name = text, name.characters.count > 0 {
-                self.currentAlbum = .album(name: name, photosCount: 0, lastModified: NSDate())
+                self.currentAlbum = .newAblum(name: name)
                 self.imagePickerController.delegate = self
                 self.present(self.imagePickerController, animated: true, completion: nil)
             }
@@ -171,8 +201,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func accessDayLapseAlbum(albumFound: @escaping (PHAssetCollection) -> Void) {
+        guard let currentAlbum = self.currentAlbum else {
+            return
+        }
+        
         let fetchOptions = PHFetchOptions()
-        let albumName = kCUSTOM_ALBUM_NAME + "-" + self.currentAlbum.getName()
+        let albumName = kCUSTOM_ALBUM_NAME + "-" + currentAlbum.getName()
         let predicate = NSPredicate(format: "title = %@", albumName)
         fetchOptions.predicate = predicate
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
