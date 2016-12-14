@@ -55,7 +55,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }()
     
     // MARK: entry point
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
@@ -121,8 +120,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func listAlbums(_ albums: [Album]) {
         for album in albums {
-            let view = UILabel(forAutoLayout: ()) // fake
-            view.text = album.getName()
+            let view = ExistingCollectionColumn(album: album)
+            // let view = UILabel(forAutoLayout: ()) // fake
+            // view.text = album.getName()
             stackView.addArrangedSubview(view)
             // TODO: UI to stack view
         }
