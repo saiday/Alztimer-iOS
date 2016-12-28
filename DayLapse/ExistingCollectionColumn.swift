@@ -18,13 +18,13 @@ protocol ExistingCollectionColumnDelegate: class {
 class ExistingCollectionColumn: UIView {
     public weak var delegate: ExistingCollectionColumnDelegate?
     
+    var album: Album? = nil
     let leftPadding: CGFloat = 20
     
     weak var nameLabel: UILabel!
     weak var timestampLabel: UILabel!
     weak var photosCollection: UICollectionView!
     weak var shotButton: UIButton!
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,6 +34,7 @@ class ExistingCollectionColumn: UIView {
     
     convenience init(album: Album) {
         self.init(frame: .zero)
+        self.album = album
         configureColumn(album: album)
     }
     
@@ -42,17 +43,17 @@ class ExistingCollectionColumn: UIView {
     }
     
     func setupSubviews() {
-        let name = UILabel(forAutoLayout: ())
-        addSubview(name)
-        name.autoPinEdge(toSuperviewEdge: .top)
-        name.autoPinEdge(toSuperviewEdge: .left, withInset: leftPadding)
-        name.autoMatch(.height, to: .height, of: self, withMultiplier: 0.5)
-        name.autoPinEdge(toSuperviewEdge: .right) // TODO: remove
-        self.nameLabel = name
+        let nameLabel = UILabel(forAutoLayout: ())
+        addSubview(nameLabel)
+        nameLabel.autoPinEdge(toSuperviewEdge: .top)
+        nameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: leftPadding)
+        nameLabel.autoMatch(.height, to: .height, of: self, withMultiplier: 0.5)
+        nameLabel.autoPinEdge(toSuperviewEdge: .right) // TODO: remove
+        self.nameLabel = nameLabel
         
         let dummyBottomView = UIView(forAutoLayout: ())
         addSubview(dummyBottomView)
-        dummyBottomView.autoPinEdge(.top, to: .bottom, of: name)
+        dummyBottomView.autoPinEdge(.top, to: .bottom, of: nameLabel)
         dummyBottomView.autoPinEdge(toSuperviewEdge: .left, withInset: leftPadding)
         dummyBottomView.autoPinEdge(toSuperviewEdge: .bottom)
         dummyBottomView.autoPinEdge(toSuperviewEdge: .right) // TODO: remove
@@ -62,6 +63,11 @@ class ExistingCollectionColumn: UIView {
         timestamp.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
         timestamp.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.5)
         self.timestampLabel = timestamp
+        
+        let shotButton = UIButton(type: .custom)
+        addSubview(shotButton)
+        shotButton.autoPinEdgesToSuperviewEdges(with: .zero)
+        self.shotButton = shotButton
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
@@ -77,6 +83,14 @@ class ExistingCollectionColumn: UIView {
         self.nameLabel.font = UIFont.systemFont(ofSize: 20)
         
         self.photosCollection.backgroundColor = UIColor.yellow
+        
+        self.shotButton.addTarget(self, action: #selector(columnTapped), for: .touchUpInside)
+    }
+    
+    func columnTapped() {
+        if let album = album {
+            self.delegate?.existingCollectionColumnDidTapped(album: album)
+        }
     }
     
     func configureColumn(album: Album) {
