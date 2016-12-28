@@ -61,6 +61,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         initCustomViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        listAlbums(queryExistAlbums())
+    }
+    
     func setupSubviews() {
         view.addSubview(navigationBar)
         navigationBar.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
@@ -93,13 +99,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let button = UIButton(type: .system)
         button.setTitle("test", for: .normal)
         
-        // TODO: existing albums
-
         stackView.addArrangedSubview(button)
         stackView.addArrangedSubview(view1)
         stackView.addArrangedSubview(label)
-        
-        listAlbums(queryExistAlbums())
     }
     
     func queryExistAlbums() -> [Album] {
@@ -119,6 +121,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func listAlbums(_ albums: [Album]) {
+        for view in stackView.arrangedSubviews where view is ExistingCollectionColumn {
+            stackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+        
         for album in albums {
             let view = ExistingCollectionColumn(album: album)
             // let view = UILabel(forAutoLayout: ()) // fake
@@ -126,7 +133,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             stackView.addArrangedSubview(view)
             // TODO: UI to stack view
         }
-        
     }
     
     // MARK: CreateCollectionColumnDelegate

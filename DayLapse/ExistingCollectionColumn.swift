@@ -11,8 +11,8 @@ import UIKit
 import PureLayout
 
 protocol ExistingCollectionColumnDelegate: class {
-    func ExistingCollectionColumnDidTapped(album: Album)
-    func ExistingCollectionColumnPhotosDidTapped(image: UIImage, album: Album)
+    func existingCollectionColumnDidTapped(album: Album)
+    func existingCollectionColumnPhotosDidTapped(image: UIImage, album: Album)
 }
 
 class ExistingCollectionColumn: UIView {
