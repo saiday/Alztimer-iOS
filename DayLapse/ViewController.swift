@@ -12,7 +12,7 @@ import PureLayout
 
 import Photos
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate, ExistingCollectionColumnDelegate {
     var currentAlbum: Album?
     lazy var createCollectionView: UIView = { [unowned self] in
         let view = CreateCollectionColumn()
@@ -106,15 +106,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func queryExistAlbums() -> [Album] {
         let fetchOptions = PHFetchOptions()
-        let albumName = kCUSTOM_ALBUM_NAME + "-"
-        let predicate = NSPredicate(format: "title BEGINSWITH[c] %@", albumName)
+        let albumNamePrefix = kCUSTOM_ALBUM_NAME + "-"
+        let predicate = NSPredicate(format: "title BEGINSWITH[c] %@", albumNamePrefix)
         fetchOptions.predicate = predicate
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
         var albums: [Album] = []
         collection.enumerateObjects({ (albumAsset, start, stop) in
-            let album = Album.existingAlbum(name: albumAsset.localizedTitle!, photosCount: albumAsset.estimatedAssetCount, lastModified: albumAsset.endDate ?? Date())
-            albums.append(album)
+            if let fullName = albumAsset.localizedTitle {
+                let name = fullName.substring(from: albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.characters.count))
+                let album = Album.existingAlbum(name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumAsset.endDate ?? Date())
+                albums.append(album)
+            }
         })
         
         return albums
@@ -128,11 +131,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         for album in albums {
             let view = ExistingCollectionColumn(album: album)
-            // let view = UILabel(forAutoLayout: ()) // fake
-            // view.text = album.getName()
+            view.delegate = self
             stackView.addArrangedSubview(view)
-            // TODO: UI to stack view
         }
+    }
+    
+    func launchCamera() {
+        self.imagePickerController.delegate = self
+        if self.imagePickerController.isBeingPresented {
+            self.imagePickerController.dismiss(animated: false, completion: nil)
+        }
+        self.present(self.imagePickerController, animated: true, completion: nil)
     }
     
     // MARK: CreateCollectionColumnDelegate
@@ -145,14 +154,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let text = alert.textFields?.first?.text
             if let name = text, name.characters.count > 0 {
                 self.currentAlbum = .newAblum(name: name)
-                self.imagePickerController.delegate = self
-                self.present(self.imagePickerController, animated: true, completion: nil)
+                self.launchCamera()
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(submitAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: ExistingCollectionColumnDelegate
+    func existingCollectionColumnDidTapped(album: Album) {
+        self.currentAlbum = album
+        launchCamera()
+    }
+    
+    func existingCollectionColumnPhotosDidTapped(image: UIImage, album: Album) {
+        // not yet
     }
     
     // MARK: ImagePickerControllerDelegate
@@ -191,7 +209,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func savePhoto(image: UIImage, completion: @escaping (Error?) -> Void) {
-        accessDayLapseAlbum(albumFound: { (album) in
+        guard let album = self.currentAlbum else {
+            return
+        }
+        
+        accessDayLapseAlbum(album: album, albumFound: { (album) in
             PHPhotoLibrary.shared().performChanges({
                 let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
                 let placeholder = assetRequest.placeholderForCreatedAsset
@@ -206,13 +228,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         })
     }
     
-    func accessDayLapseAlbum(albumFound: @escaping (PHAssetCollection) -> Void) {
-        guard let currentAlbum = self.currentAlbum else {
-            return
-        }
-        
+    func accessDayLapseAlbum(album: Album, albumFound: @escaping (PHAssetCollection) -> Void) {
         let fetchOptions = PHFetchOptions()
-        let albumName = kCUSTOM_ALBUM_NAME + "-" + currentAlbum.getName()
+        let albumName = kCUSTOM_ALBUM_NAME + "-" + album.getName()
         let predicate = NSPredicate(format: "title = %@", albumName)
         fetchOptions.predicate = predicate
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
