@@ -95,6 +95,6 @@ class ExistingCollectionColumn: UIView {
     
     func configureColumn(album: Album) {
         self.nameLabel.text = album.getName()
-        self.timestampLabel.text = "2015/12/12"
+        self.timestampLabel.text = album.getReadableDate()
     }
 }

@@ -20,4 +20,17 @@ enum Album {
             return name
         }
     }
+    
+    func getReadableDate() -> String {
+        switch self {
+        case .existingAlbum(_, _, let date):
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = .none
+            
+            return formatter.string(from: date)
+        default:
+            return "none"
+        }
+    }
 }

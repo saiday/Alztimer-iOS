@@ -111,11 +111,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         fetchOptions.predicate = predicate
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
+        
         var albums: [Album] = []
+        
         collection.enumerateObjects({ (albumAsset, start, stop) in
             if let fullName = albumAsset.localizedTitle {
+                let photoAsset = PHAsset.fetchAssets(in: albumAsset, options: nil)
+                var albumLastModified = Date.distantPast
+                photoAsset.enumerateObjects({ (photo, count, stop) in
+                    if let photoDate = photo.creationDate, photoDate > albumLastModified {
+                        albumLastModified = photoDate
+                    }
+                })
                 let name = fullName.substring(from: albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.characters.count))
-                let album = Album.existingAlbum(name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumAsset.endDate ?? Date())
+                let album = Album.existingAlbum(name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumLastModified)
                 albums.append(album)
             }
         })
