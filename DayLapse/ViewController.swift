@@ -14,6 +14,7 @@ import Photos
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate, ExistingCollectionColumnDelegate {
     var currentAlbum: Album?
+    var imagePickerContorller: UIImagePickerController?
     lazy var createCollectionView: UIView = { [unowned self] in
         let view = CreateCollectionColumn()
         view.delegate = self
@@ -21,16 +22,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return view
     }()
     
-    lazy var imagePickerController: UIImagePickerController = {
+    func setupNewImagePickerController(album: Album) -> UIImagePickerController {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         imagePickerController.showsCameraControls = false
         let cameraOverlayView = CameraOverlayView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+        cameraOverlayView.setOverlayImage(image: album.getLatestPhotoImage())
         cameraOverlayView.imagePickerController = imagePickerController
         imagePickerController.cameraOverlayView = cameraOverlayView
         
         return imagePickerController
-    }()
+    }
     
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(forAutoLayout: ())
@@ -114,22 +116,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         var albums: [Album] = []
         
-        collection.enumerateObjects({ (albumAsset, start, stop) in
+        collection.enumerateObjects({ [unowned self] (albumAsset, start, stop) in
             if let fullName = albumAsset.localizedTitle {
                 let photoAsset = PHAsset.fetchAssets(in: albumAsset, options: nil)
                 var albumLastModified = Date.distantPast
+                var latestPhoto = UIImage()
+                var photosThumbnail = [UIImage]()
                 photoAsset.enumerateObjects({ (photo, count, stop) in
+                    let thumbnail = self.fetchImageFromAsset(asset: photo, size: CGSize(width: 100, height: 100))
+                    photosThumbnail.append(thumbnail)
+                    
                     if let photoDate = photo.creationDate, photoDate > albumLastModified {
                         albumLastModified = photoDate
+                        latestPhoto = self.fetchImageFromAsset(asset: photo, size: CGSize(width: 400, height: 300))
                     }
                 })
                 let name = fullName.substring(from: albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.characters.count))
-                let album = Album.existingAlbum(name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumLastModified)
+                let album = Album.existingAlbum(name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumLastModified, latestPhoto: latestPhoto, photosThumbnail: photosThumbnail)
                 albums.append(album)
             }
         })
         
         return albums
+    }
+    
+    func fetchImageFromAsset(asset: PHAsset, size: CGSize) -> UIImage {
+        let manager = PHImageManager.default()
+        let option = PHImageRequestOptions()
+        var thumbnail = UIImage()
+        option.isSynchronous = true
+        manager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+            thumbnail = result!
+        })
+        
+        return thumbnail
     }
     
     func listAlbums(_ albums: [Album]) {
@@ -146,11 +166,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func launchCamera() {
-        self.imagePickerController.delegate = self
-        if self.imagePickerController.isBeingPresented {
-            self.imagePickerController.dismiss(animated: false, completion: nil)
+        if let album = currentAlbum {
+            let imagePickerController = setupNewImagePickerController(album: album)
+            imagePickerController.delegate = self
+            
+            if let previousImagePickerController = self.imagePickerContorller, previousImagePickerController.isBeingPresented {
+                previousImagePickerController.dismiss(animated: false, completion: nil)
+            }
+            
+            self.imagePickerContorller = imagePickerController
+            self.present(imagePickerController, animated: true, completion: nil)
         }
-        self.present(self.imagePickerController, animated: true, completion: nil)
     }
     
     // MARK: CreateCollectionColumnDelegate
@@ -198,10 +224,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             } else {
                 print("no permission mdfk")
                 // FIXME: this alert is persist on screen, bad UX
-                self.imagePickerController.dismiss(animated: true, completion: { [unowned self] in
-                    let alert = UIAlertController(title: NSLocalizedString("We need your permission to accss photo library", comment: ""), message: "", preferredStyle: .alert)
-                    self.present(alert, animated: true, completion: nil)
-                })
+                if let existingImagePickerController = self.imagePickerContorller {
+                    existingImagePickerController.dismiss(animated: true, completion: { 
+                        [unowned self] in
+                        let alert = UIAlertController(title: NSLocalizedString("We need your permission to accss photo library", comment: ""), message: "", preferredStyle: .alert)
+                        self.present(alert, animated: true, completion: nil)
+
+                    })
+                }
             }
         }
     }
@@ -261,5 +291,3 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 }
-
-// fetch last photo on folder

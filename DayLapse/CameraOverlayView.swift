@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 
 class CameraOverlayView: UIView {
-    weak var overlayView: UIView!
+    weak var overlayView: UIImageView!
     weak var shotButton: UIButton!
     weak var previewButton: UIButton!
     weak var cancelButton: UIButton!
@@ -30,6 +30,12 @@ class CameraOverlayView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func setOverlayImage(image: UIImage?) {
+        if let image = image {
+            overlayView.image = image
+        }
+    }
+    
     func setupBindings() {
         _ = overlayView.rx.observe(Bool.self, #keyPath(UIView.hidden)).subscribe(onNext: { [unowned self] (isHidden) in
             self.previewButton.isSelected = isHidden!
@@ -37,7 +43,7 @@ class CameraOverlayView: UIView {
     }
     
     func setupSubviews() {
-        let overlayView = UIView(forAutoLayout: ())
+        let overlayView = UIImageView(forAutoLayout: ())
         let screenWidth = UIScreen.main.bounds.size.width
         let cameraPreviewRatio: CGFloat = 4.0 / 3.0
         overlayView.autoSetDimensions(to: CGSize(width: screenWidth, height: screenWidth * cameraPreviewRatio))
@@ -77,9 +83,8 @@ class CameraOverlayView: UIView {
     }
     
     func initCustomViews() {
-        let blueColor = UIColor.init(red: 255, green: 255, blue: 0, alpha: 0.5)
-        overlayView.backgroundColor = blueColor
-
+        overlayView.alpha = 0.5
+        
         shotButton.addTarget(self, action: #selector(shotTapped), for: .touchUpInside)
         previewButton.addTarget(self, action: #selector(previewTapped), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
