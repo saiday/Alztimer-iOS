@@ -15,7 +15,7 @@ protocol ExistingCollectionColumnDelegate: class {
     func existingCollectionColumnPhotosDidTapped(image: UIImage, album: Album)
 }
 
-class ExistingCollectionColumn: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
+class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     let thumbnailCellIdentifier = "thumbnailCellIdentifier"
     public weak var delegate: ExistingCollectionColumnDelegate?
     
@@ -44,8 +44,6 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegate, UICollectionVi
     }
     
     func setupSubviews() {
-        autoSetDimension(.height, toSize: 300)
-        
         let nameLabel = UILabel(forAutoLayout: ())
         addSubview(nameLabel)
         nameLabel.autoPinEdge(toSuperviewEdge: .top)
@@ -53,6 +51,11 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegate, UICollectionVi
         nameLabel.autoMatch(.height, to: .height, of: self, withMultiplier: 0.2)
         nameLabel.autoPinEdge(toSuperviewEdge: .right)
         self.nameLabel = nameLabel
+        
+        let shotButton = UIButton(type: .custom)
+        addSubview(shotButton)
+        shotButton.autoPinEdgesToSuperviewEdges(with: .zero)
+        self.shotButton = shotButton
         
         let dummyBottomView = UIView(forAutoLayout: ())
         addSubview(dummyBottomView)
@@ -67,24 +70,22 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegate, UICollectionVi
         timestamp.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.1)
         self.timestampLabel = timestamp
         
-        let shotButton = UIButton(type: .custom)
-        addSubview(shotButton)
-        shotButton.autoPinEdgesToSuperviewEdges(with: .zero)
-        self.shotButton = shotButton
-        
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 90, height: 120)
+        layout.itemSize = CGSize(width: 100, height: 100)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         dummyBottomView.addSubview(collection)
         collection.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
         collection.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.9)
+        collection.autoSetDimension(.height, toSize: 110)
         self.photosCollection = collection
     }
     
     func initCustomViews() {
         nameLabel.font = UIFont.systemFont(ofSize: 20)
         
+        photosCollection.backgroundColor = .clear
         photosCollection.delegate = self
         photosCollection.dataSource = self
         photosCollection.register(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: thumbnailCellIdentifier)
@@ -104,7 +105,6 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegate, UICollectionVi
     }
     
     // MARK: CollectionView delegate, datasource
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let album = album {
             return album.thumbnails().count

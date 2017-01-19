@@ -80,7 +80,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scrollView.addSubview(stackView)
         stackView.autoPinEdgesToSuperviewEdges(with: .zero)
         stackView.autoMatch(.width, to: .width, of: scrollView)
-        stackView.autoMatch(.height, to: .height, of: scrollView, withMultiplier: 5) // TODO: find a way out
         
         view.addSubview(createCollectionView)
         createCollectionView.autoSetDimension(.height, toSize: 50)
