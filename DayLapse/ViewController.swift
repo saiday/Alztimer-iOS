@@ -27,7 +27,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePickerController.sourceType = .camera
         imagePickerController.showsCameraControls = false
         let cameraOverlayView = CameraOverlayView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
-        cameraOverlayView.setOverlayImage(image: album.getLatestPhotoImage())
+        cameraOverlayView.setOverlayImage(image: album.latestPhotoImage())
         cameraOverlayView.imagePickerController = imagePickerController
         imagePickerController.cameraOverlayView = cameraOverlayView
         
@@ -37,8 +37,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(forAutoLayout: ())
         stackView.axis = .vertical
-//        stackView.distribution = .equalSpacing
-//        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
         stackView.spacing = 30;
         return stackView
     }()
@@ -80,7 +80,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         scrollView.addSubview(stackView)
         stackView.autoPinEdgesToSuperviewEdges(with: .zero)
         stackView.autoMatch(.width, to: .width, of: scrollView)
-        stackView.autoMatch(.height, to: .height, of: scrollView)
+        stackView.autoMatch(.height, to: .height, of: scrollView, withMultiplier: 5) // TODO: find a way out
         
         view.addSubview(createCollectionView)
         createCollectionView.autoSetDimension(.height, toSize: 50)
@@ -90,20 +90,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func initCustomViews() {
         view.backgroundColor = UIColor.white
-        
-        let view1 = UIView()
-        view1.backgroundColor = UIColor.blue
-        
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.text = "this is a fucking testthis is a fucking testthis is a fucking testthis is a fucking test"
-        
-        let button = UIButton(type: .system)
-        button.setTitle("test", for: .normal)
-        
-        stackView.addArrangedSubview(button)
-        stackView.addArrangedSubview(view1)
-        stackView.addArrangedSubview(label)
     }
     
     func queryExistAlbums() -> [Album] {
@@ -269,7 +255,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func accessDayLapseAlbum(album: Album, albumFound: @escaping (PHAssetCollection) -> Void) {
         let fetchOptions = PHFetchOptions()
-        let albumName = kCUSTOM_ALBUM_NAME + "-" + album.getName()
+        let albumName = kCUSTOM_ALBUM_NAME + "-" + album.name()
         let predicate = NSPredicate(format: "title = %@", albumName)
         fetchOptions.predicate = predicate
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)

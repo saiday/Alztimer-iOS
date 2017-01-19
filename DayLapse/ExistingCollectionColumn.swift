@@ -15,7 +15,8 @@ protocol ExistingCollectionColumnDelegate: class {
     func existingCollectionColumnPhotosDidTapped(image: UIImage, album: Album)
 }
 
-class ExistingCollectionColumn: UIView {
+class ExistingCollectionColumn: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
+    let thumbnailCellIdentifier = "thumbnailCellIdentifier"
     public weak var delegate: ExistingCollectionColumnDelegate?
     
     var album: Album? = nil
@@ -43,12 +44,14 @@ class ExistingCollectionColumn: UIView {
     }
     
     func setupSubviews() {
+        autoSetDimension(.height, toSize: 300)
+        
         let nameLabel = UILabel(forAutoLayout: ())
         addSubview(nameLabel)
         nameLabel.autoPinEdge(toSuperviewEdge: .top)
         nameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: leftPadding)
-        nameLabel.autoMatch(.height, to: .height, of: self, withMultiplier: 0.5)
-        nameLabel.autoPinEdge(toSuperviewEdge: .right) // TODO: remove
+        nameLabel.autoMatch(.height, to: .height, of: self, withMultiplier: 0.2)
+        nameLabel.autoPinEdge(toSuperviewEdge: .right)
         self.nameLabel = nameLabel
         
         let dummyBottomView = UIView(forAutoLayout: ())
@@ -56,12 +59,12 @@ class ExistingCollectionColumn: UIView {
         dummyBottomView.autoPinEdge(.top, to: .bottom, of: nameLabel)
         dummyBottomView.autoPinEdge(toSuperviewEdge: .left, withInset: leftPadding)
         dummyBottomView.autoPinEdge(toSuperviewEdge: .bottom)
-        dummyBottomView.autoPinEdge(toSuperviewEdge: .right) // TODO: remove
+        dummyBottomView.autoPinEdge(toSuperviewEdge: .right)
         
         let timestamp = UILabel(forAutoLayout: ())
         dummyBottomView.addSubview(timestamp)
         timestamp.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        timestamp.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.5)
+        timestamp.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.1)
         self.timestampLabel = timestamp
         
         let shotButton = UIButton(type: .custom)
@@ -75,16 +78,18 @@ class ExistingCollectionColumn: UIView {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         dummyBottomView.addSubview(collection)
         collection.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
-        collection.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.5)
+        collection.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.9)
         self.photosCollection = collection
     }
     
     func initCustomViews() {
-        self.nameLabel.font = UIFont.systemFont(ofSize: 20)
+        nameLabel.font = UIFont.systemFont(ofSize: 20)
         
-        self.photosCollection.backgroundColor = UIColor.yellow
+        photosCollection.delegate = self
+        photosCollection.dataSource = self
+        photosCollection.register(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: thumbnailCellIdentifier)
         
-        self.shotButton.addTarget(self, action: #selector(columnTapped), for: .touchUpInside)
+        shotButton.addTarget(self, action: #selector(columnTapped), for: .touchUpInside)
     }
     
     func columnTapped() {
@@ -94,7 +99,27 @@ class ExistingCollectionColumn: UIView {
     }
     
     func configureColumn(album: Album) {
-        self.nameLabel.text = album.getName()
-        self.timestampLabel.text = album.getReadableDate()
+        self.nameLabel.text = album.name()
+        self.timestampLabel.text = album.readableDate()
+    }
+    
+    // MARK: CollectionView delegate, datasource
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let album = album {
+            return album.thumbnails().count
+        }
+        return 0
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: thumbnailCellIdentifier, for: indexPath) as! ThumbnailCollectionViewCell
+        cell.imageView.image = album?.thumbnails()[indexPath.row]
+        
+        return cell
     }
 }

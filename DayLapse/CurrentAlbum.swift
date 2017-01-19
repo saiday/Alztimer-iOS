@@ -14,7 +14,7 @@ enum Album {
     case existingAlbum(name: String, photosCount: Int, lastModified: Date, latestPhoto: UIImage, photosThumbnail: [UIImage])
     case newAblum(name: String)
     
-    func getName() -> String {
+    func name() -> String {
         switch self {
         case .existingAlbum(let name, _, _, _, _):
             return name
@@ -23,7 +23,7 @@ enum Album {
         }
     }
     
-    func getReadableDate() -> String {
+    func readableDate() -> String {
         switch self {
         case .existingAlbum(_, _, let date, _, _):
             let formatter = DateFormatter()
@@ -36,12 +36,21 @@ enum Album {
         }
     }
     
-    func getLatestPhotoImage() -> UIImage? {
+    func latestPhotoImage() -> UIImage? {
         switch self {
         case .existingAlbum(_, _, _, let photo, _):
             return photo
         default:
             return nil
+        }
+    }
+    
+    func thumbnails() -> [UIImage] {
+        switch self {
+        case .existingAlbum(_, _, _, _, let thumbnails):
+            return thumbnails
+        default:
+            return []
         }
     }
 }
