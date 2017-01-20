@@ -20,11 +20,12 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     public weak var delegate: ExistingCollectionColumnDelegate?
     
     var album: Album? = nil
-    let leftPadding: CGFloat = 20
+    let padding: CGFloat = 20
     
     weak var nameLabel: UILabel!
     weak var timestampLabel: UILabel!
     weak var photosCollection: UICollectionView!
+    weak var highlightImage: UIImageView!
     weak var shotButton: UIButton!
     
     override init(frame: CGRect) {
@@ -44,45 +45,65 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     }
     
     func setupSubviews() {
+        let contentView = UIView(forAutoLayout: ())
+        addSubview(contentView)
+        contentView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsetsMake(padding, padding, padding, padding))
+        
+        let highlightImage = UIImageView(forAutoLayout: ())
+        contentView.addSubview(highlightImage)
+        highlightImage.autoPinEdge(toSuperviewEdge: .left)
+        highlightImage.autoSetDimension(.height, toSize: 150)
+        highlightImage.autoMatch(.width, to: .height, of: highlightImage)
+        highlightImage.autoAlignAxis(toSuperviewAxis: .horizontal)
+        self.highlightImage = highlightImage
+        
+        let indicator = UIImageView(forAutoLayout: ())
+        indicator.image = #imageLiteral(resourceName: "camera")
+        highlightImage.addSubview(indicator)
+        indicator.autoPinEdge(toSuperviewEdge: .right)
+        indicator.autoPinEdge(toSuperviewEdge: .bottom)
+        indicator.autoMatch(.height, to: .height, of: highlightImage, withMultiplier: 0.2)
+        indicator.autoMatch(.width, to: .height, of: indicator)
+        
+        let shotButton = UIButton(type: .system)
+        contentView.addSubview(shotButton)
+        shotButton.autoPinEdge(.top, to: .top, of: highlightImage)
+        shotButton.autoPinEdge(.right, to: .right, of: highlightImage)
+        shotButton.autoPinEdge(.left, to: .left, of: highlightImage)
+        shotButton.autoPinEdge(.bottom, to: .bottom, of: highlightImage)
+        self.shotButton = shotButton
+        
         let nameLabel = UILabel(forAutoLayout: ())
-        addSubview(nameLabel)
+        contentView.addSubview(nameLabel)
         nameLabel.autoPinEdge(toSuperviewEdge: .top)
-        nameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: leftPadding)
-        nameLabel.autoMatch(.height, to: .height, of: self, withMultiplier: 0.2)
+        nameLabel.autoPinEdge(.left, to: .right, of: highlightImage, withOffset: padding)
         nameLabel.autoPinEdge(toSuperviewEdge: .right)
         self.nameLabel = nameLabel
         
-        let shotButton = UIButton(type: .custom)
-        addSubview(shotButton)
-        shotButton.autoPinEdgesToSuperviewEdges(with: .zero)
-        self.shotButton = shotButton
-        
-        let dummyBottomView = UIView(forAutoLayout: ())
-        addSubview(dummyBottomView)
-        dummyBottomView.autoPinEdge(.top, to: .bottom, of: nameLabel)
-        dummyBottomView.autoPinEdge(toSuperviewEdge: .left, withInset: leftPadding)
-        dummyBottomView.autoPinEdge(toSuperviewEdge: .bottom)
-        dummyBottomView.autoPinEdge(toSuperviewEdge: .right)
-        
         let timestamp = UILabel(forAutoLayout: ())
-        dummyBottomView.addSubview(timestamp)
-        timestamp.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .bottom)
-        timestamp.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.1)
+        contentView.addSubview(timestamp)
+        timestamp.autoPinEdge(.top, to: .bottom, of: nameLabel)
+        timestamp.autoPinEdge(.left, to: .right, of: highlightImage, withOffset: padding)
+        timestamp.autoPinEdge(toSuperviewEdge: .right)
         self.timestampLabel = timestamp
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: 100, height: 100)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        dummyBottomView.addSubview(collection)
-        collection.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
-        collection.autoMatch(.height, to: .height, of: dummyBottomView, withMultiplier: 0.9)
-        collection.autoSetDimension(.height, toSize: 110)
+        contentView.addSubview(collection)
+        collection.autoPinEdge(.top, to: .bottom, of: timestamp)
+        collection.autoPinEdge(.left, to: .right, of: highlightImage, withOffset: padding)
+        collection.autoPinEdge(toSuperviewEdge: .right)
+        collection.autoPinEdge(toSuperviewEdge: .bottom)
+        collection.autoSetDimension(.height, toSize: 120)
         self.photosCollection = collection
     }
     
     func initCustomViews() {
+        photosCollection.showsHorizontalScrollIndicator = false
+        
         nameLabel.font = UIFont.systemFont(ofSize: 20)
         
         photosCollection.backgroundColor = .clear
@@ -90,18 +111,19 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
         photosCollection.dataSource = self
         photosCollection.register(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: thumbnailCellIdentifier)
         
-        shotButton.addTarget(self, action: #selector(columnTapped), for: .touchUpInside)
+        shotButton.addTarget(self, action: #selector(shotTapped), for: .touchUpInside)
     }
     
-    func columnTapped() {
+    func shotTapped() {
         if let album = album {
             self.delegate?.existingCollectionColumnDidTapped(album: album)
         }
     }
     
     func configureColumn(album: Album) {
-        self.nameLabel.text = album.name()
-        self.timestampLabel.text = album.readableDate()
+        nameLabel.text = album.name()
+        timestampLabel.text = album.readableDate()
+        highlightImage.image = album.latestPhotoImage()
     }
     
     // MARK: CollectionView delegate, datasource

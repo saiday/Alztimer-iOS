@@ -13,6 +13,8 @@
 
 // swiftlint:disable type_body_length
 enum Asset: String {
+  case Camera = "camera"
+  case Film = "film"
   case Preview_disabled = "preview_disabled"
   case Preview = "preview"
   case Shot_highlight = "shot_highlight"
