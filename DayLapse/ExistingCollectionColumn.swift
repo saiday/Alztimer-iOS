@@ -11,7 +11,7 @@ import UIKit
 import PureLayout
 
 protocol ExistingCollectionColumnDelegate: class {
-    func existingCollectionColumnDidTapped(album: Album)
+    func existingCollectionShotTapped(album: Album)
     func existingCollectionColumnPhotosDidTapped(image: UIImage, album: Album)
 }
 
@@ -102,6 +102,9 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     }
     
     func initCustomViews() {
+        highlightImage.contentMode = .scaleAspectFill
+        highlightImage.clipsToBounds = true
+        
         photosCollection.showsHorizontalScrollIndicator = false
         
         nameLabel.font = UIFont.systemFont(ofSize: 20)
@@ -116,7 +119,7 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     
     func shotTapped() {
         if let album = album {
-            self.delegate?.existingCollectionColumnDidTapped(album: album)
+            self.delegate?.existingCollectionShotTapped(album: album)
         }
     }
     

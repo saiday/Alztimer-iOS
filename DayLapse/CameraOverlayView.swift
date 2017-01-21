@@ -18,6 +18,7 @@ class CameraOverlayView: UIView {
     weak var previewButton: UIButton!
     weak var cancelButton: UIButton!
     weak var imagePickerController: UIImagePickerController?
+    weak var deviceMotionRecorder: DeviceMotionRecorder?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -95,6 +96,10 @@ class CameraOverlayView: UIView {
         if let picker = imagePickerController {
             picker.takePicture()
         }
+        
+        if let recorder = deviceMotionRecorder {
+            recorder.enableMotionManager(false)
+        }
     }
     
     func previewTapped() {
@@ -104,6 +109,10 @@ class CameraOverlayView: UIView {
     func cancelTapped() {
         if let picker = imagePickerController {
             picker.dismiss(animated: true, completion: nil)
+        }
+        
+        if let recorder = deviceMotionRecorder {
+            recorder.enableMotionManager(false)
         }
     }
 }

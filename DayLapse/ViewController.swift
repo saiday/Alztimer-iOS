@@ -11,10 +11,12 @@ import UIKit
 import PureLayout
 
 import Photos
+import CoreMotion
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate, ExistingCollectionColumnDelegate {
     var currentAlbum: Album?
     var imagePickerContorller: UIImagePickerController?
+    let deviceMotionRecorder = DeviceMotionRecorder()
     lazy var createCollectionView: UIView = { [unowned self] in
         let view = CreateCollectionColumn()
         view.delegate = self
@@ -27,6 +29,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePickerController.sourceType = .camera
         imagePickerController.showsCameraControls = false
         let cameraOverlayView = CameraOverlayView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+        deviceMotionRecorder.enableMotionManager(true)
+        cameraOverlayView.deviceMotionRecorder = deviceMotionRecorder
         cameraOverlayView.setOverlayImage(image: album.latestPhotoImage())
         cameraOverlayView.imagePickerController = imagePickerController
         imagePickerController.cameraOverlayView = cameraOverlayView
@@ -184,7 +188,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: ExistingCollectionColumnDelegate
-    func existingCollectionColumnDidTapped(album: Album) {
+    func existingCollectionShotTapped(album: Album) {
         self.currentAlbum = album
         launchCamera()
     }
@@ -195,7 +199,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: ImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        print(info)
+        // TODO: save 3 device motion data
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         photosAuthorizedStatus { [unowned self](authorized) in
             if authorized {
