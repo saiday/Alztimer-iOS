@@ -12,6 +12,7 @@ import PureLayout
 
 import Photos
 import CoreMotion
+import CoreData
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate, ExistingCollectionColumnDelegate {
     var currentAlbum: Album?
@@ -121,7 +122,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     }
                 })
                 let name = fullName.substring(from: albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.characters.count))
-                let album = Album.existingAlbum(name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumLastModified, latestPhoto: latestPhoto, photosThumbnail: photosThumbnail)
+                let album = Album.existingAlbum(uid: albumAsset.localIdentifier, name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumLastModified, latestPhoto: latestPhoto, photosThumbnail: photosThumbnail)
                 albums.append(album)
             }
         })
@@ -199,11 +200,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: ImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        // TODO: save 3 device motion data
+        // TODO: store device motion
+        let deviceMotion = deviceMotionRecorder.motionManager.deviceMotion
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         photosAuthorizedStatus { [unowned self](authorized) in
             if authorized {
-                self.savePhoto(image: image) { (error) in
+                self.savePhoto(image: image, deviceMotion: deviceMotion) { (error) in
                     if let err = error {
                         print(err)
                     }
@@ -236,9 +238,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    func savePhoto(image: UIImage, completion: @escaping (Error?) -> Void) {
+    func savePhoto(image: UIImage, deviceMotion: CMDeviceMotion?, completion: @escaping (Error?) -> Void) {
         guard let album = self.currentAlbum else {
             return
+        }
+        
+        // store device motion data
+        let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+        let request = NSFetchRequest<NSFetchRequestResult>()
+        request.entity = NSEntityDescription.entity(forEntityName: "ManagedAlbum", in: persistenContainer.viewContext)
+        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "localIdentifier == %@", album.uid())
+        do {
+            let result = try persistenContainer.viewContext.fetch(request)
+            // TODO: if [], create one
+            print(result)
+        } catch {
+            print("fetch error")
         }
         
         accessDayLapseAlbum(album: album, albumFound: { (album) in

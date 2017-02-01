@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G1217" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ManagedAlbum" representedClassName=".ManagedAlbum" syncable="YES" codeGenerationType="class">
+        <attribute name="localIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="latestDeviceMotionGravity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedDeviceMotionGravity" inverseName="album" inverseEntity="ManagedDeviceMotionGravity" syncable="YES"/>
+    </entity>
+    <entity name="ManagedDeviceMotionGravity" representedClassName=".ManagedDeviceMotionGravity" syncable="YES" codeGenerationType="class">
+        <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="z" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedAlbum" inverseName="latestDeviceMotionGravity" inverseEntity="ManagedAlbum" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ManagedAlbum" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="ManagedDeviceMotionGravity" positionX="-54" positionY="-9" width="128" height="105"/>
+    </elements>
 </model>

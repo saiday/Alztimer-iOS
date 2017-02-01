@@ -11,12 +11,12 @@ import Foundation
 import UIKit
 
 enum Album {
-    case existingAlbum(name: String, photosCount: Int, lastModified: Date, latestPhoto: UIImage, photosThumbnail: [UIImage])
+    case existingAlbum(uid: String, name: String, photosCount: Int, lastModified: Date, latestPhoto: UIImage, photosThumbnail: [UIImage])
     case newAblum(name: String)
     
     func name() -> String {
         switch self {
-        case .existingAlbum(let name, _, _, _, _):
+        case .existingAlbum(_, let name, _, _, _, _):
             return name
         case .newAblum(let name):
             return name
@@ -25,7 +25,7 @@ enum Album {
     
     func readableDate() -> String {
         switch self {
-        case .existingAlbum(_, _, let date, _, _):
+        case .existingAlbum(_, _, _, let date, _, _):
             let formatter = DateFormatter()
             formatter.dateStyle = .long
             formatter.timeStyle = .none
@@ -38,7 +38,7 @@ enum Album {
     
     func latestPhotoImage() -> UIImage? {
         switch self {
-        case .existingAlbum(_, _, _, let photo, _):
+        case .existingAlbum(_, _, _, _, let photo, _):
             return photo
         default:
             return nil
@@ -47,10 +47,19 @@ enum Album {
     
     func thumbnails() -> [UIImage] {
         switch self {
-        case .existingAlbum(_, _, _, _, let thumbnails):
+        case .existingAlbum(_, _, _, _, _, let thumbnails):
             return thumbnails
         default:
             return []
+        }
+    }
+    
+    func uid() -> String {
+        switch self {
+        case .existingAlbum(let uid, _, _, _, _, _):
+            return uid
+        default:
+            return ""
         }
     }
 }
