@@ -193,7 +193,6 @@
 				DE2881A0108CB086B1D56476 /* Embed Pods Frameworks */,
 				0E56977F27AC4F2550A69043 /* Copy Pods Resources */,
 				SWIFCLEANCUSTOMRUNSCRIPT /* Swift-Clean Run Script */,
-				83F6BBC71DFDA99A00B52508 /* Swiftgen */,
 			);
 			buildRules = (
 			);
@@ -312,20 +311,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
-		};
-		83F6BBC71DFDA99A00B52508 /* Swiftgen */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Swiftgen;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftgen >/dev/null; then\nswiftgen images \"$PROJECT_DIR/DayLapse/Assets.xcassets\" --output \"$PROJECT_DIR/DayLapse/Constants/Images.swift\"\nelse\necho \"warning: SwiftGen not installed, download it from https://github.com/AliSoftware/SwiftGen\"\nfi";
 		};
 		C0C8DBCECE1F3AB3AD54BB67 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
