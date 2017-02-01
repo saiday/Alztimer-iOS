@@ -234,7 +234,7 @@
 				TargetAttributes = {
 					83200F1C1D4D099C0057180B = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 3J7D45E984;
+						DevelopmentTeam = 84ZV2QN25Z;
 						DevelopmentTeamName = "MingSheng Tsai (Personal Team)";
 						ProvisioningStyle = Automatic;
 					};
@@ -520,6 +520,7 @@
 			baseConfigurationReference = A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 84ZV2QN25Z;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DayLapse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -534,6 +535,7 @@
 			baseConfigurationReference = 49963C8B261EA40F3F5E577E /* Pods-DayLapse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 84ZV2QN25Z;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DayLapse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
