@@ -245,8 +245,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // store device motion data
         let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-        let request = NSFetchRequest<NSFetchRequestResult>()
-        request.entity = NSEntityDescription.entity(forEntityName: "ManagedAlbum", in: persistenContainer.viewContext)
+        let request: NSFetchRequest<ManagedAlbum> = ManagedAlbum.fetchRequest()
         request.fetchLimit = 1
         request.predicate = NSPredicate(format: "localIdentifier == %@", album.uid())
         do {
