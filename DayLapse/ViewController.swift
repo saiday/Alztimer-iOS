@@ -250,10 +250,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         request.predicate = NSPredicate(format: "localIdentifier == %@", album.uid())
         do {
             let result = try persistenContainer.viewContext.fetch(request)
-            // TODO: if [], create one
-            print(result)
+            let managedAlbum = result.count > 0 ? result.first! : ManagedAlbum(context: persistenContainer.viewContext)
+            let managedGravityData = ManagedDeviceMotionGravity(context: persistenContainer.viewContext)
+            managedGravityData.x = deviceMotion?.gravity.x ?? 0
+            managedGravityData.y = deviceMotion?.gravity.y ?? 0
+            managedGravityData.z = deviceMotion?.gravity.z ?? 0
+            managedAlbum.latestDeviceMotionGravity = managedGravityData
+            managedAlbum.localIdentifier = album.uid()
+            try managedAlbum.managedObjectContext?.save()
         } catch {
-            print("fetch error")
+            print("fetch MangedAlbum error")
         }
         
         accessDayLapseAlbum(album: album, albumFound: { (album) in
