@@ -44,7 +44,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.alignment = .fill
-        stackView.spacing = 30;
+        stackView.spacing = 30
         return stackView
     }()
     
@@ -58,7 +58,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(forAutoLayout: ())
         scrollView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
-        return scrollView;
+        return scrollView
     }()
     
     // MARK: entry point
@@ -122,7 +122,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     }
                 })
                 let name = fullName.substring(from: albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.characters.count))
-                let album = Album.existingAlbum(uid: albumAsset.localIdentifier, name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumLastModified, latestPhoto: latestPhoto, photosThumbnail: photosThumbnail)
+                let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+                let managedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: albumAsset.localIdentifier)
+                let gravityData = managedAlbum?.gravityDataTuple()
+                let album = Album.existingAlbum(uid: albumAsset.localIdentifier, name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumLastModified, latestPhoto: latestPhoto, photosThumbnail: photosThumbnail, gravityData: gravityData ?? (0, 0, 0))
                 albums.append(album)
             }
         })
@@ -245,21 +248,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         // store device motion data
         let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-        let request: NSFetchRequest<ManagedAlbum> = ManagedAlbum.fetchRequest()
-        request.fetchLimit = 1
-        request.predicate = NSPredicate(format: "localIdentifier == %@", album.uid())
+        let fetchedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: album.uid())
+        let managedAlbum = fetchedAlbum ?? ManagedAlbum(context: persistenContainer.viewContext)
+        
+        let managedGravityData = ManagedDeviceMotionGravity(context: persistenContainer.viewContext)
+        managedGravityData.x = deviceMotion?.gravity.x ?? 0
+        managedGravityData.y = deviceMotion?.gravity.y ?? 0
+        managedGravityData.z = deviceMotion?.gravity.z ?? 0
+        managedAlbum.latestDeviceMotionGravity = managedGravityData
+        managedAlbum.localIdentifier = album.uid()
         do {
-            let result = try persistenContainer.viewContext.fetch(request)
-            let managedAlbum = result.count > 0 ? result.first! : ManagedAlbum(context: persistenContainer.viewContext)
-            let managedGravityData = ManagedDeviceMotionGravity(context: persistenContainer.viewContext)
-            managedGravityData.x = deviceMotion?.gravity.x ?? 0
-            managedGravityData.y = deviceMotion?.gravity.y ?? 0
-            managedGravityData.z = deviceMotion?.gravity.z ?? 0
-            managedAlbum.latestDeviceMotionGravity = managedGravityData
-            managedAlbum.localIdentifier = album.uid()
             try managedAlbum.managedObjectContext?.save()
         } catch {
-            print("fetch MangedAlbum error")
+            print("save managedalbum error")
         }
         
         accessDayLapseAlbum(album: album, albumFound: { (album) in
