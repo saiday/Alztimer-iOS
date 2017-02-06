@@ -31,8 +31,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePickerController.showsCameraControls = false
         let cameraOverlayView = CameraOverlayView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
         deviceMotionRecorder.enableMotionManager(true)
+        deviceMotionRecorder.delegate = cameraOverlayView
         cameraOverlayView.deviceMotionRecorder = deviceMotionRecorder
         cameraOverlayView.setOverlayImage(image: album.latestPhotoImage())
+        cameraOverlayView.lastGravityData = album.gravityData()
         cameraOverlayView.imagePickerController = imagePickerController
         imagePickerController.cameraOverlayView = cameraOverlayView
         

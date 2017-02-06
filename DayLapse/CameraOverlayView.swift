@@ -12,13 +12,18 @@ import PureLayout
 import RxSwift
 import RxCocoa
 
-class CameraOverlayView: UIView {
+class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
     weak var overlayView: UIImageView!
     weak var shotButton: UIButton!
     weak var previewButton: UIButton!
     weak var cancelButton: UIButton!
     weak var imagePickerController: UIImagePickerController?
     weak var deviceMotionRecorder: DeviceMotionRecorder?
+    var lastGravityData: (Double, Double, Double)? {
+        didSet {
+            print("last gravity data =  \(lastGravityData)")
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,5 +119,10 @@ class CameraOverlayView: UIView {
         if let recorder = deviceMotionRecorder {
             recorder.enableMotionManager(false)
         }
+    }
+    
+    // MARK: DeviceMotionRecorderDelegate
+    func deviceMotionRecorderDidUpdate(gravityData: (Double, Double, Double)) {
+        print("x: \(gravityData.0), y: \(gravityData.2), z:\(gravityData.2)")
     }
 }

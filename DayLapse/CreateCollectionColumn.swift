@@ -15,7 +15,7 @@ protocol CreateCollectionColumnDelegate: class {
 }
 
 class CreateCollectionColumn: UIView {
-    public weak var delegate: CreateCollectionColumnDelegate?
+    weak var delegate: CreateCollectionColumnDelegate?
     
     weak var button: UIButton!
     
