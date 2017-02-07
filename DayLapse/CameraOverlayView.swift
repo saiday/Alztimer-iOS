@@ -17,11 +17,17 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
     weak var shotButton: UIButton!
     weak var previewButton: UIButton!
     weak var cancelButton: UIButton!
+    weak var currentGravityXLabel, currentGravityYLabel, currentGravityZLabel: UILabel!
+    weak var lastGravityXLabel, lastGravityYLabel, lastGravityZLabel: UILabel!
     weak var imagePickerController: UIImagePickerController?
     weak var deviceMotionRecorder: DeviceMotionRecorder?
     var lastGravityData: (Double, Double, Double)? {
         didSet {
-            print("last gravity data =  \(lastGravityData)")
+            if let data = lastGravityData {
+                self.lastGravityXLabel.text = "\(data.0)"
+                self.lastGravityYLabel.text = "\(data.1)"
+                self.lastGravityZLabel.text = "\(data.2)"
+            }
         }
     }
     
@@ -59,6 +65,42 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         overlayView.autoPinEdge(toSuperviewEdge: .top)
         overlayView.autoAlignAxis(toSuperviewAxis: .vertical)
         self.overlayView = overlayView
+        
+        let currentGravityXLabel = UILabel(forAutoLayout: ())
+        self.addSubview(currentGravityXLabel)
+        currentGravityXLabel.autoPinEdge(toSuperviewEdge: .left)
+        currentGravityXLabel.autoPinEdge(toSuperviewEdge: .top)
+        self.currentGravityXLabel = currentGravityXLabel
+        
+        let currentGravityYLabel = UILabel(forAutoLayout: ())
+        self.addSubview(currentGravityYLabel)
+        currentGravityYLabel.autoPinEdge(toSuperviewEdge: .left)
+        currentGravityYLabel.autoPinEdge(.top, to: .bottom, of: currentGravityXLabel)
+        self.currentGravityYLabel = currentGravityYLabel
+
+        let currentGravityZLabel = UILabel(forAutoLayout: ())
+        self.addSubview(currentGravityZLabel)
+        currentGravityZLabel.autoPinEdge(toSuperviewEdge: .left)
+        currentGravityZLabel.autoPinEdge(.top, to: .bottom, of: currentGravityYLabel)
+        self.currentGravityZLabel = currentGravityZLabel
+        
+        let lastGravityXLabel = UILabel(forAutoLayout: ())
+        self.addSubview(lastGravityXLabel)
+        lastGravityXLabel.autoPinEdge(toSuperviewEdge: .right)
+        lastGravityXLabel.autoPinEdge(toSuperviewEdge: .top)
+        self.lastGravityXLabel = lastGravityXLabel
+        
+        let lastGravityYLabel = UILabel(forAutoLayout: ())
+        self.addSubview(lastGravityYLabel)
+        lastGravityYLabel.autoPinEdge(toSuperviewEdge: .right)
+        lastGravityYLabel.autoPinEdge(.top, to: .bottom, of: lastGravityXLabel)
+        self.lastGravityYLabel = lastGravityYLabel
+        
+        let lastGravityZLabel = UILabel(forAutoLayout: ())
+        self.addSubview(lastGravityZLabel)
+        lastGravityZLabel.autoPinEdge(toSuperviewEdge: .right)
+        lastGravityZLabel.autoPinEdge(.top, to: .bottom, of: lastGravityYLabel)
+        self.lastGravityZLabel = lastGravityZLabel
         
         let controlsView = UIView(forAutoLayout: ())
         self.addSubview(controlsView)
@@ -123,6 +165,8 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
     
     // MARK: DeviceMotionRecorderDelegate
     func deviceMotionRecorderDidUpdate(gravityData: (Double, Double, Double)) {
-        print("x: \(gravityData.0), y: \(gravityData.2), z:\(gravityData.2)")
+        self.currentGravityXLabel.text = "\(gravityData.0)"
+        self.currentGravityYLabel.text = "\(gravityData.1)"
+        self.currentGravityZLabel.text = "\(gravityData.2)"
     }
 }
