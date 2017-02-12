@@ -22,6 +22,7 @@
 		838859AB1E3690D600D6A4CB /* DeviceMotionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838859AA1E3690D600D6A4CB /* DeviceMotionRecorder.swift */; };
 		83B6C2DD1DD2572200221604 /* CurrentAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B6C2DC1DD2572200221604 /* CurrentAlbum.swift */; };
 		83BFA3311E49092000CC79FE /* ManagedAlbumExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BFA3301E49092000CC79FE /* ManagedAlbumExtension.swift */; };
+		83BFA3331E50686600CC79FE /* DeviceMotionMatchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BFA3321E50686600CC79FE /* DeviceMotionMatchingView.swift */; };
 		83F368711E01A6EB0098DBA6 /* ExistingCollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F368701E01A6EB0098DBA6 /* ExistingCollectionColumn.swift */; };
 		83F6BBCA1DFDAC2200B52508 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F6BBC91DFDAC2200B52508 /* Images.swift */; };
 		85556263DB11702C305EF086 /* Pods_DayLapse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -59,6 +60,7 @@
 		838859AA1E3690D600D6A4CB /* DeviceMotionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMotionRecorder.swift; sourceTree = "<group>"; };
 		83B6C2DC1DD2572200221604 /* CurrentAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentAlbum.swift; sourceTree = "<group>"; };
 		83BFA3301E49092000CC79FE /* ManagedAlbumExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedAlbumExtension.swift; sourceTree = "<group>"; };
+		83BFA3321E50686600CC79FE /* DeviceMotionMatchingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMotionMatchingView.swift; sourceTree = "<group>"; };
 		83C40BC11D53BDC9004EED15 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/Mac/PureLayout.framework; sourceTree = "<group>"; };
 		83F368701E01A6EB0098DBA6 /* ExistingCollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingCollectionColumn.swift; sourceTree = "<group>"; };
 		83F6BBC91DFDAC2200B52508 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				834C41D11DAAC00600547FB1 /* CreateCollectionColumn.swift */,
 				83F368701E01A6EB0098DBA6 /* ExistingCollectionColumn.swift */,
 				838859A51E31594E00D6A4CB /* ThumbnailCollectionViewCell.swift */,
+				83BFA3321E50686600CC79FE /* DeviceMotionMatchingView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				83F6BBCA1DFDAC2200B52508 /* Images.swift in Sources */,
 				834C41D21DAAC00600547FB1 /* CreateCollectionColumn.swift in Sources */,
 				838859AB1E3690D600D6A4CB /* DeviceMotionRecorder.swift in Sources */,
+				83BFA3331E50686600CC79FE /* DeviceMotionMatchingView.swift in Sources */,
 				83200F231D4D099C0057180B /* ViewController.swift in Sources */,
 				83200F211D4D099C0057180B /* AppDelegate.swift in Sources */,
 			);

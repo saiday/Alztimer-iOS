@@ -118,9 +118,11 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         previewButton.setImage(UIImage(named: "preview"), for: .normal)
         previewButton.setImage(UIImage(named: "preview_disabled"), for: .selected)
         controlsView.addSubview(previewButton)
-        previewButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+        previewButton.autoAlignAxis(.horizontal, toSameAxisOf: controlsView, withMultiplier: 0.5)
         previewButton.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
         self.previewButton = previewButton
+        
+        // TODO: new gravity button
         
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
