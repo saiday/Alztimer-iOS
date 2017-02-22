@@ -17,6 +17,7 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
     weak var shotButton: UIButton!
     weak var previewButton: UIButton!
     weak var cancelButton: UIButton!
+    weak var matchingView: DeviceMotionMatchingView!
     weak var currentGravityXLabel, currentGravityYLabel, currentGravityZLabel: UILabel!
     weak var lastGravityXLabel, lastGravityYLabel, lastGravityZLabel: UILabel!
     weak var imagePickerController: UIImagePickerController?
@@ -122,14 +123,19 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         previewButton.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
         self.previewButton = previewButton
         
-        // TODO: new gravity button
-        
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         controlsView.addSubview(cancelButton)
         cancelButton.autoAlignAxis(toSuperviewAxis: .horizontal)
         cancelButton.autoPinEdge(toSuperviewEdge: .left, withInset: 20)
         self.cancelButton = cancelButton
+        
+        let matchingView = DeviceMotionMatchingView(forAutoLayout: ())
+        matchingView.autoSetDimensions(to: CGSize(width: 50, height: 50))
+        controlsView.addSubview(matchingView)
+        matchingView.autoAlignAxis(.horizontal, toSameAxisOf: controlsView, withMultiplier: 1.5)
+        matchingView.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
+        self.matchingView = matchingView
     }
     
     func initCustomViews() {
@@ -167,6 +173,8 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
     
     // MARK: DeviceMotionRecorderDelegate
     func deviceMotionRecorderDidUpdate(gravityData: (Double, Double, Double)) {
+        self.matchingView.gravityData = gravityData
+        self.matchingView.setNeedsDisplay()
         self.currentGravityXLabel.text = "\(gravityData.0)"
         self.currentGravityYLabel.text = "\(gravityData.1)"
         self.currentGravityZLabel.text = "\(gravityData.2)"
