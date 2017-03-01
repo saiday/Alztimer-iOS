@@ -12,6 +12,7 @@ import PureLayout
 
 class DeviceMotionMatchingView: UIView {
     var gravityData: (Double, Double, Double) = (0, 0, 0)
+    var originGravityData: (Double, Double, Double) = (0, 0, 0)
     weak var oval1: CAShapeLayer!
     weak var oval2: CAShapeLayer!
     weak var oval3: CAShapeLayer!
@@ -39,13 +40,14 @@ class DeviceMotionMatchingView: UIView {
         let lineWidth: CGFloat = 1
 
 
-        self.oval1.path = ovalPath(arcCenter: CGPoint(x: axisValueTransform(old: CGFloat(gravityData.0), max: minSize), y: origin), radius: CGFloat(quarterSize - (lineWidth / 2)))
-        self.oval2.path = ovalPath(arcCenter: CGPoint(x: origin, y: axisValueTransform(old: CGFloat(gravityData.1), max: minSize)), radius: CGFloat(quarterSize - (lineWidth / 2)))
-        self.oval3.path = ovalPath(arcCenter: CGPoint(x: axisValueTransform(old: CGFloat(gravityData.2), max: minSize), y: axisValueTransform(old: CGFloat(gravityData.2), max: minSize)), radius: CGFloat(quarterSize - (lineWidth / 2)))
+        self.oval1.path = ovalPath(arcCenter: CGPoint(x: axisValueTransform(old: CGFloat(gravityData.0 - originGravityData.0), max: minSize), y: origin), radius: CGFloat(quarterSize - (lineWidth / 2)))
+        self.oval2.path = ovalPath(arcCenter: CGPoint(x: origin, y: axisValueTransform(old: CGFloat(gravityData.1 - originGravityData.1), max: minSize)), radius: CGFloat(quarterSize - (lineWidth / 2)))
+        self.oval3.path = ovalPath(arcCenter: CGPoint(x: origin, y: origin), radius: (quarterSize - (lineWidth / 2)) * CGFloat((gravityData.2 - originGravityData.2 + 1)))
+
     }
     
     func axisValueTransform(old: CGFloat, max: CGFloat) -> CGFloat {
-        // -1 ... 1 -> 0 ... X
+        // -1 ... 1 -> 0 ... max
         let average = max / 2
         let new = (old + 1) * average
         return new
@@ -66,17 +68,17 @@ class DeviceMotionMatchingView: UIView {
         let lineWidth: CGFloat = 1
 
         let oval1 = CAShapeLayer()
-        oval1.fillColor = UIColor.clear.cgColor
+        oval1.fillColor = UIColor(colorLiteralRed: 1, green: 0, blue: 0, alpha: 0.5).cgColor
         oval1.strokeColor = UIColor.red.cgColor
         oval1.lineWidth = lineWidth
         
         let oval2 = CAShapeLayer()
-        oval2.fillColor = UIColor.clear.cgColor
+        oval2.fillColor = UIColor(colorLiteralRed: 0, green: 1, blue: 0, alpha: 0.5).cgColor
         oval2.strokeColor = UIColor.green.cgColor
         oval2.lineWidth = lineWidth
         
         let oval3 = CAShapeLayer()
-        oval3.fillColor = UIColor.clear.cgColor
+        oval3.fillColor = UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: 0.5).cgColor
         oval3.strokeColor = UIColor.blue.cgColor
         oval3.lineWidth = lineWidth
         

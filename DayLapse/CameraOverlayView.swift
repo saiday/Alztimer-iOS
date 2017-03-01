@@ -28,6 +28,8 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
                 self.lastGravityXLabel.text = "\(data.0)"
                 self.lastGravityYLabel.text = "\(data.1)"
                 self.lastGravityZLabel.text = "\(data.2)"
+                
+                matchingView.originGravityData = data
             }
         }
     }
