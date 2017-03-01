@@ -244,51 +244,59 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func savePhoto(image: UIImage, deviceMotion: CMDeviceMotion?, completion: @escaping (Error?) -> Void) {
-        guard let album = self.currentAlbum else {
+        guard let currentAlbum = self.currentAlbum else {
             return
         }
         
-        // store device motion data
-        let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-        let fetchedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: album.uid())
-        let managedAlbum = fetchedAlbum ?? ManagedAlbum(context: persistenContainer.viewContext)
-        
-        let managedGravityData = ManagedDeviceMotionGravity(context: persistenContainer.viewContext)
-        managedGravityData.x = deviceMotion?.gravity.x ?? 0
-        managedGravityData.y = deviceMotion?.gravity.y ?? 0
-        managedGravityData.z = deviceMotion?.gravity.z ?? 0
-        managedAlbum.latestDeviceMotionGravity = managedGravityData
-        managedAlbum.localIdentifier = album.uid()
-        do {
-            try managedAlbum.managedObjectContext?.save()
-        } catch {
-            print("save managedalbum error")
-        }
-        
-        accessDayLapseAlbum(album: album, albumFound: { (album) in
+        accessDayLapseAlbum(album: currentAlbum, albumFound: { (albumAsset, album) in
             PHPhotoLibrary.shared().performChanges({
                 let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
                 let placeholder = assetRequest.placeholderForCreatedAsset
-                let albumChangeRequest = PHAssetCollectionChangeRequest(for: album)
+                let albumChangeRequest = PHAssetCollectionChangeRequest(for: albumAsset)
                 let assets: NSArray = [placeholder!]
                 albumChangeRequest!.addAssets(assets)
                 }, completionHandler: { (success, error) in
-                    DispatchQueue.main.async {
-                        completion(error)
+                    if success {
+                        // store device motion data
+                        let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+                        let fetchedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: album.uid())
+                        let managedAlbum = fetchedAlbum ?? ManagedAlbum(context: persistenContainer.viewContext)
+                        
+                        let managedGravityData = ManagedDeviceMotionGravity(context: persistenContainer.viewContext)
+                        managedGravityData.x = deviceMotion?.gravity.x ?? 0
+                        managedGravityData.y = deviceMotion?.gravity.y ?? 0
+                        managedGravityData.z = deviceMotion?.gravity.z ?? 0
+                        managedAlbum.latestDeviceMotionGravity = managedGravityData
+                        managedAlbum.localIdentifier = album.uid()
+                        var coreDataError: RunTimeError?
+                        do {
+                            try managedAlbum.managedObjectContext?.save()
+                        } catch {
+                            print("save managedalbum error")
+                            coreDataError = RunTimeError(debugMessage: "save managedalbum error")
+                        }
+                        
+                        DispatchQueue.main.async {
+                            completion(coreDataError)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(error)
+                        }
                     }
             })
         })
     }
     
-    func accessDayLapseAlbum(album: Album, albumFound: @escaping (PHAssetCollection) -> Void) {
+    func accessDayLapseAlbum(album: Album, albumFound: @escaping (PHAssetCollection, Album) -> Void) {
         let fetchOptions = PHFetchOptions()
         let albumName = kCUSTOM_ALBUM_NAME + "-" + album.name()
         let predicate = NSPredicate(format: "title = %@", albumName)
         fetchOptions.predicate = predicate
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
-        if let album = collection.firstObject {
-            albumFound(album)
+        if let albumAsset = collection.firstObject {
+            albumFound(albumAsset, album)
         } else {
             // If not found, create new album
             var assetCollectionPlaceholder = PHObjectPlaceholder()
@@ -298,7 +306,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }, completionHandler: { success, error in
                     if (success) {
                         let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [assetCollectionPlaceholder.localIdentifier], options: nil)
-                        albumFound(collectionFetchResult.firstObject!)
+                        albumFound(collectionFetchResult.firstObject!, album.alertUid(uid: assetCollectionPlaceholder.localIdentifier))
                     }
             })
         }

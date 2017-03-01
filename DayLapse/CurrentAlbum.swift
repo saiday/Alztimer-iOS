@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 enum Album {
-    case existingAlbum(uid: String, name: String, photosCount: Int, lastModified: Date, latestPhoto: UIImage, photosThumbnail: [UIImage], gravityData: (Double, Double, Double))
+    case existingAlbum(uid: String, name: String, photosCount: Int, lastModified: Date, latestPhoto: UIImage?, photosThumbnail: [UIImage], gravityData: (Double, Double, Double))
     case newAblum(name: String)
     
     func name() -> String {
@@ -70,5 +70,27 @@ enum Album {
         default:
             return (0, 0, 0)
         }
+    }
+    
+    func photosCount() -> Int {
+        switch self {
+        case .existingAlbum(_, _, let count, _, _, _, _):
+            return count
+        default:
+            return 0
+        }
+    }
+
+    func lastModified() -> Date {
+        switch self {
+        case .existingAlbum(_, _, _, let lastModified, _, _, _):
+            return lastModified
+        default:
+            return Date(timeIntervalSince1970: 0)
+        }
+    }
+    
+    func alertUid(uid: String) -> Album {
+        return Album.existingAlbum(uid: uid, name: name(), photosCount: photosCount(), lastModified: lastModified(), latestPhoto: latestPhotoImage(), photosThumbnail: thumbnails(), gravityData: gravityData())
     }
 }
