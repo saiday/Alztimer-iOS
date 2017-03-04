@@ -117,6 +117,14 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         shotButton.autoCenterInSuperview()
         self.shotButton = shotButton
         
+        let matchingView = DeviceMotionMatchingView(forAutoLayout: ())
+        controlsView.addSubview(matchingView)
+        matchingView.autoAlignAxis(.horizontal, toSameAxisOf: shotButton)
+        matchingView.autoAlignAxis(.vertical, toSameAxisOf: shotButton)
+        matchingView.autoMatch(.height, to: .height, of: shotButton)
+        matchingView.autoMatch(.width, to: .width, of: shotButton)
+        self.matchingView = matchingView
+        
         let previewButton = UIButton(type: .custom)
         previewButton.setImage(UIImage(named: "preview"), for: .normal)
         previewButton.setImage(UIImage(named: "preview_disabled"), for: .selected)
@@ -131,16 +139,10 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         cancelButton.autoAlignAxis(toSuperviewAxis: .horizontal)
         cancelButton.autoPinEdge(toSuperviewEdge: .left, withInset: 20)
         self.cancelButton = cancelButton
-        
-        let matchingView = DeviceMotionMatchingView(forAutoLayout: ())
-        matchingView.autoSetDimensions(to: CGSize(width: 50, height: 50))
-        controlsView.addSubview(matchingView)
-        matchingView.autoAlignAxis(.horizontal, toSameAxisOf: controlsView, withMultiplier: 1.5)
-        matchingView.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
-        self.matchingView = matchingView
     }
     
     func initCustomViews() {
+        matchingView.isUserInteractionEnabled = false
         overlayView.alpha = 0.5
         
         shotButton.addTarget(self, action: #selector(shotTapped), for: .touchUpInside)

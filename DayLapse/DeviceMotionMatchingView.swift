@@ -21,8 +21,7 @@ class DeviceMotionMatchingView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
-//        initCustomViews()
-//        setupBindings()
+        initCustomViews()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,7 +42,6 @@ class DeviceMotionMatchingView: UIView {
         self.oval1.path = ovalPath(arcCenter: CGPoint(x: axisValueTransform(old: CGFloat(gravityData.0 - originGravityData.0), max: minSize), y: origin), radius: CGFloat(quarterSize - (lineWidth / 2)))
         self.oval2.path = ovalPath(arcCenter: CGPoint(x: origin, y: axisValueTransform(old: CGFloat(gravityData.1 - originGravityData.1), max: minSize)), radius: CGFloat(quarterSize - (lineWidth / 2)))
         self.oval3.path = ovalPath(arcCenter: CGPoint(x: origin, y: origin), radius: (quarterSize - (lineWidth / 2)) * CGFloat((gravityData.2 - originGravityData.2 + 1)))
-
     }
     
     func axisValueTransform(old: CGFloat, max: CGFloat) -> CGFloat {
@@ -90,5 +88,8 @@ class DeviceMotionMatchingView: UIView {
         self.oval2 = oval2
         self.oval3 = oval3
     }
-
+    
+    func initCustomViews() {
+        self.backgroundColor = UIColor.clear
+    }
 }
