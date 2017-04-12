@@ -23,8 +23,9 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     let padding: CGFloat = 20
     
     weak var nameLabel: UILabel!
-    weak var timestampLabel: UILabel!
-    weak var photosCollection: UICollectionView!
+    weak var createdDateLabel: UILabel!
+    weak var updatedDateLabel: UILabel!
+    weak var countLabel: UILabel!
     weak var highlightImage: UIImageView!
     weak var shotButton: UIButton!
     
@@ -47,15 +48,24 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     func setupSubviews() {
         let contentView = UIView(forAutoLayout: ())
         addSubview(contentView)
-        contentView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsetsMake(padding, padding, padding, padding))
+        contentView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsetsMake(padding, padding, 0, padding))
         
         let highlightImage = UIImageView(forAutoLayout: ())
         contentView.addSubview(highlightImage)
         highlightImage.autoPinEdge(toSuperviewEdge: .left)
-        highlightImage.autoSetDimension(.height, toSize: 150)
+        highlightImage.autoSetDimension(.height, toSize: 100)
         highlightImage.autoMatch(.width, to: .height, of: highlightImage)
         highlightImage.autoAlignAxis(toSuperviewAxis: .horizontal)
+        highlightImage.autoPinEdge(toSuperviewEdge: .bottom)
         self.highlightImage = highlightImage
+        
+        let countLabel = UILabel(forAutoLayout: ())
+        highlightImage.addSubview(countLabel)
+        countLabel.autoSetDimension(.width, toSize: 25, relation: .greaterThanOrEqual)
+        countLabel.autoSetDimension(.height, toSize: 25)
+        countLabel.autoPinEdge(toSuperviewEdge: .right)
+        countLabel.autoPinEdge(toSuperviewEdge: .top)
+        self.countLabel = countLabel
         
         let indicator = UIImageView(forAutoLayout: ())
         indicator.image = #imageLiteral(resourceName: "camera")
@@ -80,39 +90,34 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
         nameLabel.autoPinEdge(toSuperviewEdge: .right)
         self.nameLabel = nameLabel
         
-        let timestamp = UILabel(forAutoLayout: ())
-        contentView.addSubview(timestamp)
-        timestamp.autoPinEdge(.top, to: .bottom, of: nameLabel)
-        timestamp.autoPinEdge(.left, to: .right, of: highlightImage, withOffset: padding)
-        timestamp.autoPinEdge(toSuperviewEdge: .right)
-        self.timestampLabel = timestamp
+        let createdDateLabel = UILabel(forAutoLayout: ())
+        contentView.addSubview(createdDateLabel)
+        createdDateLabel.autoPinEdge(.top, to: .bottom, of: nameLabel)
+        createdDateLabel.autoPinEdge(.left, to: .right, of: highlightImage, withOffset: padding)
+        createdDateLabel.autoPinEdge(toSuperviewEdge: .right)
+        self.createdDateLabel = createdDateLabel
         
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 100, height: 100)
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        contentView.addSubview(collection)
-        collection.autoPinEdge(.top, to: .bottom, of: timestamp)
-        collection.autoPinEdge(.left, to: .right, of: highlightImage, withOffset: padding)
-        collection.autoPinEdge(toSuperviewEdge: .right)
-        collection.autoPinEdge(toSuperviewEdge: .bottom)
-        collection.autoSetDimension(.height, toSize: 120)
-        self.photosCollection = collection
+        let updatedDateLabel = UILabel(forAutoLayout: ())
+        contentView.addSubview(updatedDateLabel)
+        updatedDateLabel.autoPinEdge(.top, to: .bottom, of: createdDateLabel)
+        updatedDateLabel.autoPinEdge(.left, to: .left, of: createdDateLabel)
+        updatedDateLabel.autoPinEdge(toSuperviewEdge: .right)
+        self.updatedDateLabel = updatedDateLabel
+        
     }
     
     func initCustomViews() {
         highlightImage.contentMode = .scaleAspectFill
         highlightImage.clipsToBounds = true
         
-        photosCollection.showsHorizontalScrollIndicator = false
+        countLabel.font = UIFont.systemFont(ofSize: 13)
+        countLabel.textAlignment = .center
+        countLabel.backgroundColor = UIColor(colorLiteralRed: 1, green: 1, blue: 1, alpha: 0.4)
         
         nameLabel.font = UIFont.systemFont(ofSize: 20)
         
-        photosCollection.backgroundColor = .clear
-        photosCollection.delegate = self
-        photosCollection.dataSource = self
-        photosCollection.register(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: thumbnailCellIdentifier)
+        createdDateLabel.font = UIFont.systemFont(ofSize: 11)
+        updatedDateLabel.font = UIFont.systemFont(ofSize: 11)
         
         shotButton.addTarget(self, action: #selector(shotTapped), for: .touchUpInside)
     }
@@ -125,7 +130,9 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     
     func configureColumn(album: Album) {
         nameLabel.text = album.name()
-        timestampLabel.text = album.readableDate()
+        createdDateLabel.text = album.createdDate()
+        updatedDateLabel.text = album.lastModifiedDate()
+        countLabel.text = String(album.photosCount())
         highlightImage.image = album.latestPhotoImage()
     }
     

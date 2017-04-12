@@ -14,16 +14,20 @@ import Photos
 import CoreMotion
 import CoreData
 
+extension ViewController {
+}
+
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate, ExistingCollectionColumnDelegate {
     var currentAlbum: Album?
     var imagePickerContorller: UIImagePickerController?
     let deviceMotionRecorder = DeviceMotionRecorder()
+    
     lazy var createCollectionView: UIView = { [unowned self] in
         let view = CreateCollectionColumn()
         view.delegate = self
         
         return view
-    }()
+        }()
     
     func setupNewImagePickerController(album: Album) -> UIImagePickerController {
         let imagePickerController = UIImagePickerController()
@@ -44,9 +48,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(forAutoLayout: ())
         stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fillProportionally
         stackView.alignment = .fill
-        stackView.spacing = 30
         return stackView
     }()
     
@@ -63,7 +66,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return scrollView
     }()
     
-    // MARK: entry point
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubviews()
@@ -111,23 +113,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         collection.enumerateObjects({ [unowned self] (albumAsset, start, stop) in
             if let fullName = albumAsset.localizedTitle {
                 let photoAsset = PHAsset.fetchAssets(in: albumAsset, options: nil)
-                var albumLastModified = Date.distantPast
+                var albumLastModifiedDate = Date.distantPast
+                var albumCreatedDate = Date.distantFuture
                 var latestPhoto = UIImage()
                 var photosThumbnail = [UIImage]()
                 photoAsset.enumerateObjects({ (photo, count, stop) in
                     let thumbnail = self.fetchImageFromAsset(asset: photo, size: CGSize(width: 100, height: 100))
                     photosThumbnail.append(thumbnail)
                     
-                    if let photoDate = photo.creationDate, photoDate > albumLastModified {
-                        albumLastModified = photoDate
-                        latestPhoto = self.fetchImageFromAsset(asset: photo, size: CGSize(width: 400, height: 300))
+                    if let photoDate = photo.creationDate {
+                        if photoDate > albumLastModifiedDate {
+                            albumLastModifiedDate = photoDate
+                            latestPhoto = self.fetchImageFromAsset(asset: photo, size: CGSize(width: 400, height: 300))
+                        }
+                        if photoDate < albumCreatedDate {
+                            albumCreatedDate = photoDate
+                        }
                     }
                 })
                 let name = fullName.substring(from: albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.characters.count))
                 let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
                 let managedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: albumAsset.localIdentifier)
                 let gravityData = managedAlbum?.gravityDataTuple()
-                let album = Album.existingAlbum(uid: albumAsset.localIdentifier, name: name, photosCount: albumAsset.estimatedAssetCount, lastModified: albumLastModified, latestPhoto: latestPhoto, photosThumbnail: photosThumbnail, gravityData: gravityData ?? (0, 0, 0))
+                let album = Album.existingAlbum(uid: albumAsset.localIdentifier, name: name, photosCount: albumAsset.estimatedAssetCount, dates: (created: albumCreatedDate, lastModified: albumLastModifiedDate), latestPhoto: latestPhoto, photosThumbnail: photosThumbnail, gravityData: gravityData ?? (0, 0, 0))
                 albums.append(album)
             }
         })

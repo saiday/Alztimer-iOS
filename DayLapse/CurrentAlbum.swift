@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 enum Album {
-    case existingAlbum(uid: String, name: String, photosCount: Int, lastModified: Date, latestPhoto: UIImage?, photosThumbnail: [UIImage], gravityData: (Double, Double, Double))
+    case existingAlbum(uid: String, name: String, photosCount: Int, dates: (created: Date, lastModified: Date), latestPhoto: UIImage?, photosThumbnail: [UIImage], gravityData: (Double, Double, Double))
     case newAblum(name: String)
     
     func name() -> String {
@@ -23,14 +23,27 @@ enum Album {
         }
     }
     
-    func readableDate() -> String {
+    func createdDate() -> String {
         switch self {
-        case .existingAlbum(_, _, _, let date, _, _, _):
+        case .existingAlbum(_, _, _, let (created, _), _, _, _):
             let formatter = DateFormatter()
             formatter.dateStyle = .long
             formatter.timeStyle = .none
             
-            return formatter.string(from: date)
+            return formatter.string(from: created)
+        default:
+            return "none"
+        }
+    }
+    
+    func lastModifiedDate() -> String {
+        switch self {
+        case .existingAlbum(_, _, _, let (_, lastModified), _, _, _):
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = .none
+            
+            return formatter.string(from: lastModified)
         default:
             return "none"
         }
@@ -81,16 +94,16 @@ enum Album {
         }
     }
 
-    func lastModified() -> Date {
+    func dates() -> (Date, Date) {
         switch self {
-        case .existingAlbum(_, _, _, let lastModified, _, _, _):
-            return lastModified
+        case .existingAlbum(_, _, _, let dates, _, _, _):
+            return dates
         default:
-            return Date(timeIntervalSince1970: 0)
+            return (Date(timeIntervalSince1970: 0), Date(timeIntervalSince1970: 0))
         }
     }
     
     func alertUid(uid: String) -> Album {
-        return Album.existingAlbum(uid: uid, name: name(), photosCount: photosCount(), lastModified: lastModified(), latestPhoto: latestPhotoImage(), photosThumbnail: thumbnails(), gravityData: gravityData())
+        return Album.existingAlbum(uid: uid, name: name(), photosCount: photosCount(), dates: dates(), latestPhoto: latestPhotoImage(), photosThumbnail: thumbnails(), gravityData: gravityData())
     }
 }
