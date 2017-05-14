@@ -7,7 +7,9 @@
 //
 
 import UIKit
+
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let viewControoler = ViewController()
         window?.rootViewController = viewControoler
         window?.makeKeyAndVisible()
+        
+        FIRApp.configure()
+        
         return true
     }
 

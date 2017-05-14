@@ -26,7 +26,8 @@
 		83BFA3331E50686600CC79FE /* DeviceMotionMatchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BFA3321E50686600CC79FE /* DeviceMotionMatchingView.swift */; };
 		83F368711E01A6EB0098DBA6 /* ExistingCollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F368701E01A6EB0098DBA6 /* ExistingCollectionColumn.swift */; };
 		83F6BBCA1DFDAC2200B52508 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F6BBC91DFDAC2200B52508 /* Images.swift */; };
-		85556263DB11702C305EF086 /* Pods_DayLapse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		83FCE75A1EC8A38F00D88D98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83FCE7591EC8A38F00D88D98 /* GoogleService-Info.plist */; };
+		DF02243A14DFCB4573C45F16 /* Pods_DayLapse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1627B68E1065E526962944 /* Pods_DayLapse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		49963C8B261EA40F3F5E577E /* Pods-DayLapse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.release.xcconfig"; sourceTree = "<group>"; };
-		4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DayLapse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B1627B68E1065E526962944 /* Pods_DayLapse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DayLapse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83200F1D1D4D099C0057180B /* DayLapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayLapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83200F201D4D099C0057180B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83200F221D4D099C0057180B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,7 +66,9 @@
 		83C40BC11D53BDC9004EED15 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/Mac/PureLayout.framework; sourceTree = "<group>"; };
 		83F368701E01A6EB0098DBA6 /* ExistingCollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingCollectionColumn.swift; sourceTree = "<group>"; };
 		83F6BBC91DFDAC2200B52508 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
-		A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.debug.xcconfig"; sourceTree = "<group>"; };
+		83FCE7591EC8A38F00D88D98 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9251BF97F2A14E33E4BD65F9 /* Pods-DayLapse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.release.xcconfig"; sourceTree = "<group>"; };
+		EED4E404F6AF11CCD99C5A4E /* Pods-DayLapse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +78,7 @@
 			files = (
 				838859A81E335EA500D6A4CB /* CoreMotion.framework in Frameworks */,
 				834C41CE1D9AEBC600547FB1 /* Photos.framework in Frameworks */,
-				85556263DB11702C305EF086 /* Pods_DayLapse.framework in Frameworks */,
+				DF02243A14DFCB4573C45F16 /* Pods_DayLapse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,11 +92,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D624F28CAA8A3838AA3404B /* Pods */ = {
+		3B4B1C68D2B550EA44055308 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */,
-				49963C8B261EA40F3F5E577E /* Pods-DayLapse.release.xcconfig */,
+				EED4E404F6AF11CCD99C5A4E /* Pods-DayLapse.debug.xcconfig */,
+				9251BF97F2A14E33E4BD65F9 /* Pods-DayLapse.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -106,7 +108,7 @@
 				83200F371D4D099D0057180B /* DayLapseTests */,
 				83200F1E1D4D099C0057180B /* Products */,
 				83C40BC01D53BDC9004EED15 /* Frameworks */,
-				2D624F28CAA8A3838AA3404B /* Pods */,
+				3B4B1C68D2B550EA44055308 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -133,6 +135,7 @@
 				83200F2C1D4D099D0057180B /* LaunchScreen.storyboard */,
 				83200F2F1D4D099D0057180B /* Info.plist */,
 				83200F271D4D099D0057180B /* DayLapse.xcdatamodeld */,
+				83FCE7591EC8A38F00D88D98 /* GoogleService-Info.plist */,
 			);
 			path = DayLapse;
 			sourceTree = "<group>";
@@ -174,7 +177,7 @@
 				838859A71E335EA500D6A4CB /* CoreMotion.framework */,
 				834C41CD1D9AEBC600547FB1 /* Photos.framework */,
 				83C40BC11D53BDC9004EED15 /* PureLayout.framework */,
-				4A04BDE8C481AEA62C42EF6E /* Pods_DayLapse.framework */,
+				7B1627B68E1065E526962944 /* Pods_DayLapse.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,14 +197,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83200F3D1D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapse" */;
 			buildPhases = (
-				C0C8DBCECE1F3AB3AD54BB67 /* Check Pods Manifest.lock */,
+				AC587B6FA09D7998DF9A32D8 /* [CP] Check Pods Manifest.lock */,
 				83200F191D4D099C0057180B /* Sources */,
 				83200F1A1D4D099C0057180B /* Frameworks */,
 				83200F1B1D4D099C0057180B /* Resources */,
 				83006D791D4E683F00920608 /* Treat TODO: and FIXME: as warnings */,
-				DE2881A0108CB086B1D56476 /* Embed Pods Frameworks */,
-				0E56977F27AC4F2550A69043 /* Copy Pods Resources */,
 				SWIFCLEANCUSTOMRUNSCRIPT /* Swift-Clean Run Script */,
+				20CFE92F1FD48600D909C770 /* [CP] Embed Pods Frameworks */,
+				11944F43EBA9BF5AEE95C9CF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -279,6 +282,7 @@
 			files = (
 				83200F2E1D4D099D0057180B /* LaunchScreen.storyboard in Resources */,
 				83200F2B1D4D099D0057180B /* Assets.xcassets in Resources */,
+				83FCE75A1EC8A38F00D88D98 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,19 +296,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E56977F27AC4F2550A69043 /* Copy Pods Resources */ = {
+		11944F43EBA9BF5AEE95C9CF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		20CFE92F1FD48600D909C770 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		83006D791D4E683F00920608 /* Treat TODO: and FIXME: as warnings */ = {
@@ -321,34 +340,19 @@
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
 		};
-		C0C8DBCECE1F3AB3AD54BB67 /* Check Pods Manifest.lock */ = {
+		AC587B6FA09D7998DF9A32D8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		DE2881A0108CB086B1D56476 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		SWIFCLEANCUSTOMRUNSCRIPT /* Swift-Clean Run Script */ = {
@@ -514,7 +518,7 @@
 		};
 		83200F3E1D4D099D0057180B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A669614866AE3B94BB249B27 /* Pods-DayLapse.debug.xcconfig */;
+			baseConfigurationReference = EED4E404F6AF11CCD99C5A4E /* Pods-DayLapse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 84ZV2QN25Z;
@@ -529,7 +533,7 @@
 		};
 		83200F3F1D4D099D0057180B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49963C8B261EA40F3F5E577E /* Pods-DayLapse.release.xcconfig */;
+			baseConfigurationReference = 9251BF97F2A14E33E4BD65F9 /* Pods-DayLapse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 84ZV2QN25Z;

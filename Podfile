@@ -2,8 +2,9 @@ use_frameworks!
 
 target 'DayLapse' do
   pod 'PureLayout',                 '~> 3.0.2'
-  pod 'RxSwift',                    '~> 3.0.0-beta.1'
-  pod 'RxCocoa',                    '~> 3.0.0-beta.1'
+  pod 'RxSwift',                    '~> 3.3.1'
+  pod 'RxCocoa',                    '~> 3.3.1'
+  pod 'Firebase/Core',              '~> 3.15.0'
 end
 
 
