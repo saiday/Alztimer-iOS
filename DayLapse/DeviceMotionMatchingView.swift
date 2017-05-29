@@ -12,7 +12,7 @@ import PureLayout
 
 class DeviceMotionMatchingView: UIView {
     var gravityData: (Double, Double, Double) = (0, 0, 0)
-    var originGravityData: (Double, Double, Double) = (0, 0, 0)
+    var originGravityData: GravityData?
     weak var oval1: CAShapeLayer!
     weak var oval2: CAShapeLayer!
     weak var oval3: CAShapeLayer!
@@ -39,9 +39,11 @@ class DeviceMotionMatchingView: UIView {
         let lineWidth: CGFloat = 1
 
 
-        self.oval1.path = ovalPath(arcCenter: CGPoint(x: axisValueTransform(old: CGFloat(gravityData.0 - originGravityData.0), max: minSize), y: origin), radius: CGFloat(quarterSize - (lineWidth / 2)))
-        self.oval2.path = ovalPath(arcCenter: CGPoint(x: origin, y: axisValueTransform(old: CGFloat(gravityData.1 - originGravityData.1), max: minSize)), radius: CGFloat(quarterSize - (lineWidth / 2)))
-        self.oval3.path = ovalPath(arcCenter: CGPoint(x: origin, y: origin), radius: (quarterSize - (lineWidth / 2)) * CGFloat((gravityData.2 - originGravityData.2 + 1)))
+        if let data = originGravityData {
+            self.oval1.path = ovalPath(arcCenter: CGPoint(x: axisValueTransform(old: CGFloat(gravityData.0 - data.x), max: minSize), y: origin), radius: CGFloat(quarterSize - (lineWidth / 2)))
+            self.oval2.path = ovalPath(arcCenter: CGPoint(x: origin, y: axisValueTransform(old: CGFloat(gravityData.1 - data.y), max: minSize)), radius: CGFloat(quarterSize - (lineWidth / 2)))
+            self.oval3.path = ovalPath(arcCenter: CGPoint(x: origin, y: origin), radius: (quarterSize - (lineWidth / 2)) * CGFloat((gravityData.2 - data.z + 1)))
+        }
     }
     
     func axisValueTransform(old: CGFloat, max: CGFloat) -> CGFloat {

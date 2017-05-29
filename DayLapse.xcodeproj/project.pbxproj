@@ -17,6 +17,9 @@
 		834C41CE1D9AEBC600547FB1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834C41CD1D9AEBC600547FB1 /* Photos.framework */; };
 		834C41D01D9AF1DD00547FB1 /* Atlas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C41CF1D9AF1DD00547FB1 /* Atlas.swift */; };
 		834C41D21DAAC00600547FB1 /* CreateCollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C41D11DAAC00600547FB1 /* CreateCollectionColumn.swift */; };
+		83809BA61EDC04B000A6C0FB /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83809BA51EDC04B000A6C0FB /* AdSupport.framework */; };
+		83809BAA1EDC061600A6C0FB /* PhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83809BA91EDC061600A6C0FB /* PhotoCollection.swift */; };
+		83809BAF1EDC090800A6C0FB /* GravityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83809BAE1EDC090800A6C0FB /* GravityData.swift */; };
 		838859A61E31594E00D6A4CB /* ThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838859A51E31594E00D6A4CB /* ThumbnailCollectionViewCell.swift */; };
 		838859A81E335EA500D6A4CB /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838859A71E335EA500D6A4CB /* CoreMotion.framework */; };
 		838859AB1E3690D600D6A4CB /* DeviceMotionRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838859AA1E3690D600D6A4CB /* DeviceMotionRecorder.swift */; };
@@ -56,6 +59,9 @@
 		834C41CD1D9AEBC600547FB1 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		834C41CF1D9AF1DD00547FB1 /* Atlas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atlas.swift; sourceTree = "<group>"; };
 		834C41D11DAAC00600547FB1 /* CreateCollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCollectionColumn.swift; sourceTree = "<group>"; };
+		83809BA51EDC04B000A6C0FB /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		83809BA91EDC061600A6C0FB /* PhotoCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollection.swift; sourceTree = "<group>"; };
+		83809BAE1EDC090800A6C0FB /* GravityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravityData.swift; sourceTree = "<group>"; };
 		838859A51E31594E00D6A4CB /* ThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
 		838859A71E335EA500D6A4CB /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		838859AA1E3690D600D6A4CB /* DeviceMotionRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceMotionRecorder.swift; sourceTree = "<group>"; };
@@ -76,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83809BA61EDC04B000A6C0FB /* AdSupport.framework in Frameworks */,
 				838859A81E335EA500D6A4CB /* CoreMotion.framework in Frameworks */,
 				834C41CE1D9AEBC600547FB1 /* Photos.framework in Frameworks */,
 				DF02243A14DFCB4573C45F16 /* Pods_DayLapse.framework in Frameworks */,
@@ -161,9 +168,19 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		83809BAB1EDC062000A6C0FB /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				83809BA91EDC061600A6C0FB /* PhotoCollection.swift */,
+				83809BAE1EDC090800A6C0FB /* GravityData.swift */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
 		838859A91E3690C400D6A4CB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				83809BAB1EDC062000A6C0FB /* Entity */,
 				838859AA1E3690D600D6A4CB /* DeviceMotionRecorder.swift */,
 				83BFA3301E49092000CC79FE /* ManagedAlbumExtension.swift */,
 				83A85AEA1E6746B6008A237F /* RunTimeError.swift */,
@@ -174,6 +191,7 @@
 		83C40BC01D53BDC9004EED15 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83809BA51EDC04B000A6C0FB /* AdSupport.framework */,
 				838859A71E335EA500D6A4CB /* CoreMotion.framework */,
 				834C41CD1D9AEBC600547FB1 /* Photos.framework */,
 				83C40BC11D53BDC9004EED15 /* PureLayout.framework */,
@@ -377,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				834C41D01D9AF1DD00547FB1 /* Atlas.swift in Sources */,
+				83809BAA1EDC061600A6C0FB /* PhotoCollection.swift in Sources */,
 				83A85AEB1E6746B7008A237F /* RunTimeError.swift in Sources */,
 				83BFA3311E49092000CC79FE /* ManagedAlbumExtension.swift in Sources */,
 				83F368711E01A6EB0098DBA6 /* ExistingCollectionColumn.swift in Sources */,
@@ -387,6 +406,7 @@
 				83F6BBCA1DFDAC2200B52508 /* Images.swift in Sources */,
 				834C41D21DAAC00600547FB1 /* CreateCollectionColumn.swift in Sources */,
 				838859AB1E3690D600D6A4CB /* DeviceMotionRecorder.swift in Sources */,
+				83809BAF1EDC090800A6C0FB /* GravityData.swift in Sources */,
 				83BFA3331E50686600CC79FE /* DeviceMotionMatchingView.swift in Sources */,
 				83200F231D4D099C0057180B /* ViewController.swift in Sources */,
 				83200F211D4D099C0057180B /* AppDelegate.swift in Sources */,

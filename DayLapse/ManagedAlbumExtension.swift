@@ -26,11 +26,11 @@ extension ManagedAlbum {
         return nil
     }
     
-    func gravityDataTuple() -> (Double, Double, Double) {
+    func gravityData() -> GravityData? {
         if let gravityData = self.latestDeviceMotionGravity {
-            return (gravityData.x, gravityData.y, gravityData.z)
+            return GravityData(x: gravityData.x, y: gravityData.y, z: gravityData.z)
         }
         
-        return (0, 0, 0)
+        return nil
     }
 }

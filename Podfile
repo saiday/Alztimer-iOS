@@ -5,6 +5,7 @@ target 'DayLapse' do
   pod 'RxSwift',                    '~> 3.3.1'
   pod 'RxCocoa',                    '~> 3.3.1'
   pod 'Firebase/Core',              '~> 3.15.0'
+  pod 'AFDateHelper',               '~> 4.2.2'
 end
 
 

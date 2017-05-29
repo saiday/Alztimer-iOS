@@ -1,4 +1,5 @@
 PODS:
+  - AFDateHelper (4.2.2)
   - Firebase/Core (3.15.0):
     - FirebaseAnalytics (= 3.7.0)
     - FirebaseCore (= 3.5.2)
@@ -18,12 +19,14 @@ PODS:
   - RxSwift (3.3.1)
 
 DEPENDENCIES:
+  - AFDateHelper (~> 4.2.2)
   - Firebase/Core (~> 3.15.0)
   - PureLayout (~> 3.0.2)
   - RxCocoa (~> 3.3.1)
   - RxSwift (~> 3.3.1)
 
 SPEC CHECKSUMS:
+  AFDateHelper: 0f9588a442b4d7ef862568ae5d40ab883672efb5
   Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
@@ -33,6 +36,6 @@ SPEC CHECKSUMS:
   RxCocoa: 7dcb7a1860fc9cd0e23dae67ab105fc2916670b6
   RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
 
-PODFILE CHECKSUM: b6452b15a91a2575df695506e4da3063de3232f9
+PODFILE CHECKSUM: a93cb78c895df1e85a1e188cfd987eed8e2ecde3
 
 COCOAPODS: 1.2.0

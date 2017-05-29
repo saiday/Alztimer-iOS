@@ -18,7 +18,7 @@ extension ViewController {
 }
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CreateCollectionColumnDelegate, ExistingCollectionColumnDelegate {
-    var currentAlbum: Album?
+    var currentCollection: PhotoCollection?
     var imagePickerContorller: UIImagePickerController?
     let deviceMotionRecorder = DeviceMotionRecorder()
     
@@ -29,7 +29,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return view
         }()
     
-    func setupNewImagePickerController(album: Album) -> UIImagePickerController {
+    func setupNewImagePickerController(collection: PhotoCollection) -> UIImagePickerController {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         imagePickerController.showsCameraControls = false
@@ -37,8 +37,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         deviceMotionRecorder.enableMotionManager(true)
         deviceMotionRecorder.delegate = cameraOverlayView
         cameraOverlayView.deviceMotionRecorder = deviceMotionRecorder
-        cameraOverlayView.setOverlayImage(image: album.latestPhotoImage())
-        cameraOverlayView.lastGravityData = album.gravityData()
+        cameraOverlayView.setOverlayImage(collection.latestPhoto)
+        cameraOverlayView.lastGravityData = collection.gravityDate
         cameraOverlayView.imagePickerController = imagePickerController
         imagePickerController.cameraOverlayView = cameraOverlayView
         
@@ -75,7 +75,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        listAlbums(queryExistAlbums())
+        listCollections(queryExistCollections())
     }
     
     func setupSubviews() {
@@ -100,7 +100,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         view.backgroundColor = UIColor.white
     }
     
-    func queryExistAlbums() -> [Album] {
+    func queryExistCollections() -> [PhotoCollection] {
         let fetchOptions = PHFetchOptions()
         let albumNamePrefix = kCUSTOM_ALBUM_NAME + "-"
         let predicate = NSPredicate(format: "title BEGINSWITH[c] %@", albumNamePrefix)
@@ -108,7 +108,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
         
-        var albums: [Album] = []
+        var collections: [PhotoCollection] = []
         
         collection.enumerateObjects({ [unowned self] (albumAsset, start, stop) in
             if let fullName = albumAsset.localizedTitle {
@@ -116,10 +116,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 var albumLastModifiedDate = Date.distantPast
                 var albumCreatedDate = Date.distantFuture
                 var latestPhoto = UIImage()
-                var photosThumbnail = [UIImage]()
+                var photoThumbnails = [UIImage]()
                 photoAsset.enumerateObjects({ (photo, count, stop) in
                     let thumbnail = self.fetchImageFromAsset(asset: photo, size: CGSize(width: 100, height: 100))
-                    photosThumbnail.append(thumbnail)
+                    photoThumbnails.append(thumbnail)
                     
                     if let photoDate = photo.creationDate {
                         if photoDate > albumLastModifiedDate {
@@ -134,13 +134,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let name = fullName.substring(from: albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.characters.count))
                 let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
                 let managedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: albumAsset.localIdentifier)
-                let gravityData = managedAlbum?.gravityDataTuple()
-                let album = Album.existingAlbum(uid: albumAsset.localIdentifier, name: name, photosCount: albumAsset.estimatedAssetCount, dates: (created: albumCreatedDate, lastModified: albumLastModifiedDate), latestPhoto: latestPhoto, photosThumbnail: photosThumbnail, gravityData: gravityData ?? (0, 0, 0))
-                albums.append(album)
+                let gravityData = managedAlbum?.gravityData()
+                let collection = PhotoCollection(uid: albumAsset.localIdentifier, name: name, photosCount: albumAsset.estimatedAssetCount, createdDate: albumCreatedDate, lastModifiedDate: albumLastModifiedDate, latestPhoto: latestPhoto, thumbnails: photoThumbnails, gravityData: gravityData)
+                collections.append(collection)
             }
         })
         
-        return albums
+        return collections
     }
     
     func fetchImageFromAsset(asset: PHAsset, size: CGSize) -> UIImage {
@@ -155,22 +155,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return thumbnail
     }
     
-    func listAlbums(_ albums: [Album]) {
+    func listCollections(_ collections: [PhotoCollection]) {
         for view in stackView.arrangedSubviews where view is ExistingCollectionColumn {
             stackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
         
-        for album in albums {
-            let view = ExistingCollectionColumn(album: album)
+        for collection in collections {
+            let view = ExistingCollectionColumn(collection: collection)
             view.delegate = self
             stackView.addArrangedSubview(view)
         }
     }
     
     func launchCamera() {
-        if let album = currentAlbum {
-            let imagePickerController = setupNewImagePickerController(album: album)
+        if let collection = currentCollection {
+            let imagePickerController = setupNewImagePickerController(collection: collection)
             imagePickerController.delegate = self
             
             if let previousImagePickerController = self.imagePickerContorller, previousImagePickerController.isBeingPresented {
@@ -191,7 +191,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let submitAction = UIAlertAction(title: "OK", style: .default) { [unowned self](action) in
             let text = alert.textFields?.first?.text
             if let name = text, name.characters.count > 0 {
-                self.currentAlbum = .newAblum(name: name)
+                self.currentCollection = PhotoCollection(name: name)
                 self.launchCamera()
             }
         }
@@ -202,12 +202,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     // MARK: ExistingCollectionColumnDelegate
-    func existingCollectionShotTapped(album: Album) {
-        self.currentAlbum = album
+    func existingCollectionShotTapped(collection: PhotoCollection) {
+        self.currentCollection = collection
         launchCamera()
     }
     
-    func existingCollectionColumnPhotosDidTapped(image: UIImage, album: Album) {
+    func existingCollectionColumnPhotosDidTapped(image: UIImage, collection: PhotoCollection) {
         // not yet
     }
     
@@ -252,11 +252,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func savePhoto(image: UIImage, deviceMotion: CMDeviceMotion?, completion: @escaping (Error?) -> Void) {
-        guard let currentAlbum = self.currentAlbum else {
+        guard let currentCollection = self.currentCollection else {
             return
         }
         
-        accessDayLapseAlbum(album: currentAlbum, albumFound: { (albumAsset, album) in
+        accessDayLapseAlbum(collection: currentCollection, albumFound: { (albumAsset, collection) in
             PHPhotoLibrary.shared().performChanges({
                 let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
                 let placeholder = assetRequest.placeholderForCreatedAsset
@@ -267,7 +267,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     if success {
                         // store device motion data
                         let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-                        let fetchedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: album.uid())
+                        let fetchedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: collection.uid!)
                         let managedAlbum = fetchedAlbum ?? ManagedAlbum(context: persistenContainer.viewContext)
                         
                         let managedGravityData = ManagedDeviceMotionGravity(context: persistenContainer.viewContext)
@@ -275,7 +275,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         managedGravityData.y = deviceMotion?.gravity.y ?? 0
                         managedGravityData.z = deviceMotion?.gravity.z ?? 0
                         managedAlbum.latestDeviceMotionGravity = managedGravityData
-                        managedAlbum.localIdentifier = album.uid()
+                        managedAlbum.localIdentifier = collection.uid
                         var coreDataError: RunTimeError?
                         do {
                             try managedAlbum.managedObjectContext?.save()
@@ -296,15 +296,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         })
     }
     
-    func accessDayLapseAlbum(album: Album, albumFound: @escaping (PHAssetCollection, Album) -> Void) {
+    func accessDayLapseAlbum(collection: PhotoCollection, albumFound: @escaping (PHAssetCollection, PhotoCollection) -> Void) {
+        var collection = collection
         let fetchOptions = PHFetchOptions()
-        let albumName = kCUSTOM_ALBUM_NAME + "-" + album.name()
+        let albumName = kCUSTOM_ALBUM_NAME + "-" + collection.name
         let predicate = NSPredicate(format: "title = %@", albumName)
         fetchOptions.predicate = predicate
-        let collection = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        let collectionAsset = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
-        if let albumAsset = collection.firstObject {
-            albumFound(albumAsset, album)
+        if let albumAsset = collectionAsset.firstObject {
+            albumFound(albumAsset, collection)
         } else {
             // If not found, create new album
             var assetCollectionPlaceholder = PHObjectPlaceholder()
@@ -314,7 +315,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }, completionHandler: { success, error in
                     if (success) {
                         let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [assetCollectionPlaceholder.localIdentifier], options: nil)
-                        albumFound(collectionFetchResult.firstObject!, album.alertUid(uid: assetCollectionPlaceholder.localIdentifier))
+                        collection = collection.alertUid(assetCollectionPlaceholder.localIdentifier)
+                        albumFound(collectionFetchResult.firstObject!, collection)
                     }
             })
         }

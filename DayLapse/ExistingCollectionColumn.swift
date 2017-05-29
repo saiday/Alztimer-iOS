@@ -9,17 +9,18 @@
 import UIKit
 
 import PureLayout
+import AFDateHelper
 
 protocol ExistingCollectionColumnDelegate: class {
-    func existingCollectionShotTapped(album: Album)
-    func existingCollectionColumnPhotosDidTapped(image: UIImage, album: Album)
+    func existingCollectionShotTapped(collection: PhotoCollection)
+    func existingCollectionColumnPhotosDidTapped(image: UIImage, collection: PhotoCollection)
 }
 
 class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     let thumbnailCellIdentifier = "thumbnailCellIdentifier"
     public weak var delegate: ExistingCollectionColumnDelegate?
     
-    var album: Album? = nil
+    var collection: PhotoCollection?
     let padding: CGFloat = 20
     
     weak var nameLabel: UILabel!
@@ -35,10 +36,10 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
         initCustomViews()
     }
     
-    convenience init(album: Album) {
+    convenience init(collection: PhotoCollection) {
         self.init(frame: .zero)
-        self.album = album
-        configureColumn(album: album)
+        self.collection = collection
+        configureColumn(collection)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -123,23 +124,23 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     }
     
     func shotTapped() {
-        if let album = album {
-            self.delegate?.existingCollectionShotTapped(album: album)
+        if let collection = collection {
+            self.delegate?.existingCollectionShotTapped(collection: collection)
         }
     }
     
-    func configureColumn(album: Album) {
-        nameLabel.text = album.name()
-        createdDateLabel.text = album.createdDate()
-        updatedDateLabel.text = album.lastModifiedDate()
-        countLabel.text = String(album.photosCount())
-        highlightImage.image = album.latestPhotoImage()
+    func configureColumn(_ collection: PhotoCollection) {
+        nameLabel.text = collection.name
+        createdDateLabel.text = collection.createdDate?.toString()
+        updatedDateLabel.text = collection.lastModifiedDate?.toString()
+        countLabel.text = String(describing: collection.photosCount)
+        highlightImage.image = collection.latestPhoto
     }
     
     // MARK: CollectionView delegate, datasource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let album = album {
-            return album.thumbnails().count
+        if let count = collection?.thumbnails?.count {
+            return count
         }
         return 0
     }
@@ -150,7 +151,7 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: thumbnailCellIdentifier, for: indexPath) as! ThumbnailCollectionViewCell
-        cell.imageView.image = album?.thumbnails()[indexPath.row]
+        cell.imageView.image = collection?.thumbnails?[indexPath.row]
         
         return cell
     }

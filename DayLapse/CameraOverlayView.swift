@@ -22,12 +22,12 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
     weak var lastGravityXLabel, lastGravityYLabel, lastGravityZLabel: UILabel!
     weak var imagePickerController: UIImagePickerController?
     weak var deviceMotionRecorder: DeviceMotionRecorder?
-    var lastGravityData: (Double, Double, Double)? {
+    var lastGravityData: GravityData? {
         didSet {
             if let data = lastGravityData {
-                self.lastGravityXLabel.text = "\(data.0)"
-                self.lastGravityYLabel.text = "\(data.1)"
-                self.lastGravityZLabel.text = "\(data.2)"
+                self.lastGravityXLabel.text = "\(data.x)"
+                self.lastGravityYLabel.text = "\(data.y)"
+                self.lastGravityZLabel.text = "\(data.z)"
                 
                 matchingView.originGravityData = data
             }
@@ -45,7 +45,7 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func setOverlayImage(image: UIImage?) {
+    public func setOverlayImage(_ image: UIImage?) {
         if let image = image {
             overlayView.image = image
         }
