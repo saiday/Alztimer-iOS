@@ -16,6 +16,7 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
     weak var overlayView: UIImageView!
     weak var shotButton: UIButton!
     weak var previewButton: UIButton!
+    weak var reverseCameraButton: UIButton!
     weak var cancelButton: UIButton!
     weak var matchingView: DeviceMotionMatchingView!
     weak var currentGravityXLabel, currentGravityYLabel, currentGravityZLabel: UILabel!
@@ -132,6 +133,13 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         previewButton.autoAlignAxis(.horizontal, toSameAxisOf: controlsView, withMultiplier: 0.5)
         previewButton.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
         self.previewButton = previewButton
+        
+        let reverseCameraButton = UIButton(type: .custom)
+        reverseCameraButton.setImage(#imageLiteral(resourceName: "preview"), for: .normal)
+        controlsView.addSubview(reverseCameraButton)
+        reverseCameraButton.autoAlignAxis(.horizontal, toSameAxisOf: controlsView, withMultiplier: 1.5)
+        reverseCameraButton.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
+        self.reverseCameraButton = reverseCameraButton
         
         let cancelButton = UIButton(type: .system)
         cancelButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
