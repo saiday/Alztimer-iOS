@@ -30,7 +30,7 @@
 		83F368711E01A6EB0098DBA6 /* ExistingCollectionColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F368701E01A6EB0098DBA6 /* ExistingCollectionColumn.swift */; };
 		83F6BBCA1DFDAC2200B52508 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F6BBC91DFDAC2200B52508 /* Images.swift */; };
 		83FCE75A1EC8A38F00D88D98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83FCE7591EC8A38F00D88D98 /* GoogleService-Info.plist */; };
-		96452A98A5521D00B7278E86 /* Pods_DayLapse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3B211450B880A8ECA4910D /* Pods_DayLapse.framework */; };
+		D1E55E06115C556586372F6A /* Pods_Alztimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5A46E67E686ECAFE8772FE /* Pods_Alztimer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,15 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3624B5079AF91651A08F75F8 /* Pods-DayLapse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.debug.xcconfig"; sourceTree = "<group>"; };
-		83200F1D1D4D099C0057180B /* DayLapse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayLapse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		049A885833185DCC1750FD69 /* Pods-Alztimer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alztimer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Alztimer/Pods-Alztimer.release.xcconfig"; sourceTree = "<group>"; };
+		613201551C58459F5C698A8D /* Pods-Alztimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alztimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Alztimer/Pods-Alztimer.debug.xcconfig"; sourceTree = "<group>"; };
+		83200F1D1D4D099C0057180B /* Alztimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alztimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83200F201D4D099C0057180B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83200F221D4D099C0057180B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		83200F281D4D099D0057180B /* DayLapse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DayLapse.xcdatamodel; sourceTree = "<group>"; };
 		83200F2A1D4D099D0057180B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83200F2D1D4D099D0057180B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83200F2F1D4D099D0057180B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		83200F341D4D099D0057180B /* DayLapseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DayLapseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		83200F341D4D099D0057180B /* AlztimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlztimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83200F381D4D099D0057180B /* DayLapseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLapseTests.swift; sourceTree = "<group>"; };
 		83200F3A1D4D099D0057180B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		834C41CB1D8C6A5000547FB1 /* CameraOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraOverlayView.swift; sourceTree = "<group>"; };
@@ -73,8 +74,7 @@
 		83F368701E01A6EB0098DBA6 /* ExistingCollectionColumn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingCollectionColumn.swift; sourceTree = "<group>"; };
 		83F6BBC91DFDAC2200B52508 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		83FCE7591EC8A38F00D88D98 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8A3B211450B880A8ECA4910D /* Pods_DayLapse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DayLapse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FA16D27E0E207E48DFFAC71A /* Pods-DayLapse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayLapse.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse.release.xcconfig"; sourceTree = "<group>"; };
+		AA5A46E67E686ECAFE8772FE /* Pods_Alztimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alztimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 				83809BA61EDC04B000A6C0FB /* AdSupport.framework in Frameworks */,
 				838859A81E335EA500D6A4CB /* CoreMotion.framework in Frameworks */,
 				834C41CE1D9AEBC600547FB1 /* Photos.framework in Frameworks */,
-				96452A98A5521D00B7278E86 /* Pods_DayLapse.framework in Frameworks */,
+				D1E55E06115C556586372F6A /* Pods_Alztimer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,27 +99,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79D06DA01DBBBF7AF8A50033 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				613201551C58459F5C698A8D /* Pods-Alztimer.debug.xcconfig */,
+				049A885833185DCC1750FD69 /* Pods-Alztimer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		83200F141D4D099C0057180B = {
 			isa = PBXGroup;
 			children = (
-				83200F1F1D4D099C0057180B /* DayLapse */,
-				83200F371D4D099D0057180B /* DayLapseTests */,
+				83200F1F1D4D099C0057180B /* Alztimer */,
+				83200F371D4D099D0057180B /* AlztimerTests */,
 				83200F1E1D4D099C0057180B /* Products */,
 				83C40BC01D53BDC9004EED15 /* Frameworks */,
-				9FEA2720192C9A0EA117A782 /* Pods */,
+				79D06DA01DBBBF7AF8A50033 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		83200F1E1D4D099C0057180B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				83200F1D1D4D099C0057180B /* DayLapse.app */,
-				83200F341D4D099D0057180B /* DayLapseTests.xctest */,
+				83200F1D1D4D099C0057180B /* Alztimer.app */,
+				83200F341D4D099D0057180B /* AlztimerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		83200F1F1D4D099C0057180B /* DayLapse */ = {
+		83200F1F1D4D099C0057180B /* Alztimer */ = {
 			isa = PBXGroup;
 			children = (
 				838859A91E3690C400D6A4CB /* Model */,
@@ -135,16 +144,16 @@
 				83200F271D4D099D0057180B /* DayLapse.xcdatamodeld */,
 				83FCE7591EC8A38F00D88D98 /* GoogleService-Info.plist */,
 			);
-			path = DayLapse;
+			path = Alztimer;
 			sourceTree = "<group>";
 		};
-		83200F371D4D099D0057180B /* DayLapseTests */ = {
+		83200F371D4D099D0057180B /* AlztimerTests */ = {
 			isa = PBXGroup;
 			children = (
 				83200F381D4D099D0057180B /* DayLapseTests.swift */,
 				83200F3A1D4D099D0057180B /* Info.plist */,
 			);
-			path = DayLapseTests;
+			path = AlztimerTests;
 			sourceTree = "<group>";
 		};
 		834C41C81D8C6A0100547FB1 /* Views */ = {
@@ -186,7 +195,7 @@
 				838859A71E335EA500D6A4CB /* CoreMotion.framework */,
 				834C41CD1D9AEBC600547FB1 /* Photos.framework */,
 				83C40BC11D53BDC9004EED15 /* PureLayout.framework */,
-				8A3B211450B880A8ECA4910D /* Pods_DayLapse.framework */,
+				AA5A46E67E686ECAFE8772FE /* Pods_Alztimer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,43 +208,34 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		9FEA2720192C9A0EA117A782 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3624B5079AF91651A08F75F8 /* Pods-DayLapse.debug.xcconfig */,
-				FA16D27E0E207E48DFFAC71A /* Pods-DayLapse.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		83200F1C1D4D099C0057180B /* DayLapse */ = {
+		83200F1C1D4D099C0057180B /* Alztimer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83200F3D1D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapse" */;
+			buildConfigurationList = 83200F3D1D4D099D0057180B /* Build configuration list for PBXNativeTarget "Alztimer" */;
 			buildPhases = (
-				77EE31B40661A5E8D9E49224 /* [CP] Check Pods Manifest.lock */,
+				037FDFA3F30A4A5E6C211221 /* [CP] Check Pods Manifest.lock */,
 				83200F191D4D099C0057180B /* Sources */,
 				83200F1A1D4D099C0057180B /* Frameworks */,
 				83200F1B1D4D099C0057180B /* Resources */,
 				83006D791D4E683F00920608 /* Treat TODO: and FIXME: as warnings */,
 				SWIFCLEANCUSTOMRUNSCRIPT /* Swift-Clean Run Script */,
-				EA20D8624CEBCF3867BB35C6 /* [CP] Embed Pods Frameworks */,
-				11C764F348D6137874DD5D44 /* [CP] Copy Pods Resources */,
+				8A4E95EC70500C77D78B0557 /* [CP] Embed Pods Frameworks */,
+				119608539006144062267AFB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = DayLapse;
+			name = Alztimer;
 			productName = DayLapse;
-			productReference = 83200F1D1D4D099C0057180B /* DayLapse.app */;
+			productReference = 83200F1D1D4D099C0057180B /* Alztimer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		83200F331D4D099D0057180B /* DayLapseTests */ = {
+		83200F331D4D099D0057180B /* AlztimerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 83200F401D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapseTests" */;
+			buildConfigurationList = 83200F401D4D099D0057180B /* Build configuration list for PBXNativeTarget "AlztimerTests" */;
 			buildPhases = (
 				83200F301D4D099D0057180B /* Sources */,
 				83200F311D4D099D0057180B /* Frameworks */,
@@ -246,9 +246,9 @@
 			dependencies = (
 				83200F361D4D099D0057180B /* PBXTargetDependency */,
 			);
-			name = DayLapseTests;
+			name = AlztimerTests;
 			productName = DayLapseTests;
-			productReference = 83200F341D4D099D0057180B /* DayLapseTests.xctest */;
+			productReference = 83200F341D4D099D0057180B /* AlztimerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -287,8 +287,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				83200F1C1D4D099C0057180B /* DayLapse */,
-				83200F331D4D099D0057180B /* DayLapseTests */,
+				83200F1C1D4D099C0057180B /* Alztimer */,
+				83200F331D4D099D0057180B /* AlztimerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -314,7 +314,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11C764F348D6137874DD5D44 /* [CP] Copy Pods Resources */ = {
+		037FDFA3F30A4A5E6C211221 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Alztimer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		119608539006144062267AFB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -326,25 +344,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		77EE31B40661A5E8D9E49224 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DayLapse-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Alztimer/Pods-Alztimer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		83006D791D4E683F00920608 /* Treat TODO: and FIXME: as warnings */ = {
@@ -361,13 +361,13 @@
 			shellPath = /bin/sh;
 			shellScript = "TAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
 		};
-		EA20D8624CEBCF3867BB35C6 /* [CP] Embed Pods Frameworks */ = {
+		8A4E95EC70500C77D78B0557 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Alztimer/Pods-Alztimer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFDateHelper/AFDateHelper.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
@@ -384,7 +384,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DayLapse/Pods-DayLapse-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Alztimer/Pods-Alztimer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		SWIFCLEANCUSTOMRUNSCRIPT /* Swift-Clean Run Script */ = {
@@ -440,7 +440,7 @@
 /* Begin PBXTargetDependency section */
 		83200F361D4D099D0057180B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 83200F1C1D4D099C0057180B /* DayLapse */;
+			target = 83200F1C1D4D099C0057180B /* Alztimer */;
 			targetProxy = 83200F351D4D099D0057180B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -552,28 +552,28 @@
 		};
 		83200F3E1D4D099D0057180B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3624B5079AF91651A08F75F8 /* Pods-DayLapse.debug.xcconfig */;
+			baseConfigurationReference = 613201551C58459F5C698A8D /* Pods-Alztimer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 84ZV2QN25Z;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = DayLapse/Info.plist;
+				INFOPLIST_FILE = Alztimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.daylapse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.alztimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		83200F3F1D4D099D0057180B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA16D27E0E207E48DFFAC71A /* Pods-DayLapse.release.xcconfig */;
+			baseConfigurationReference = 049A885833185DCC1750FD69 /* Pods-Alztimer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 84ZV2QN25Z;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = DayLapse/Info.plist;
+				INFOPLIST_FILE = Alztimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.daylapse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.alztimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -582,12 +582,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = DayLapseTests/Info.plist;
+				INFOPLIST_FILE = AlztimerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.DayLapseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.alztimerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DayLapse.app/DayLapse";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Alztimer.app/Alztimer";
 			};
 			name = Debug;
 		};
@@ -595,12 +595,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = DayLapseTests/Info.plist;
+				INFOPLIST_FILE = AlztimerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.DayLapseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.saiday.alztimerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DayLapse.app/DayLapse";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Alztimer.app/Alztimer";
 			};
 			name = Release;
 		};
@@ -616,7 +616,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83200F3D1D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapse" */ = {
+		83200F3D1D4D099D0057180B /* Build configuration list for PBXNativeTarget "Alztimer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83200F3E1D4D099D0057180B /* Debug */,
@@ -625,7 +625,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83200F401D4D099D0057180B /* Build configuration list for PBXNativeTarget "DayLapseTests" */ = {
+		83200F401D4D099D0057180B /* Build configuration list for PBXNativeTarget "AlztimerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83200F411D4D099D0057180B /* Debug */,

@@ -1,6 +1,6 @@
 use_frameworks!
 
-target 'DayLapse' do
+target 'Alztimer' do
   pod 'PureLayout',                 '~> 3.0.2'
   pod 'RxSwift',                    '~> 3.3.1'
   pod 'RxCocoa',                    '~> 3.3.1'
