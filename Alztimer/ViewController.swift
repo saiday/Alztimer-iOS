@@ -267,6 +267,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     if success {
                         // store device motion data
                         let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+                        // TODO: create duplicate collection name and take shot will crash here
                         let fetchedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: collection.uid!)
                         let managedAlbum = fetchedAlbum ?? ManagedAlbum(context: persistenContainer.viewContext)
                         

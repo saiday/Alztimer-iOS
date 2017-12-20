@@ -68,17 +68,17 @@ class DeviceMotionMatchingView: UIView {
         let lineWidth: CGFloat = 1
 
         let oval1 = CAShapeLayer()
-        oval1.fillColor = UIColor(colorLiteralRed: 1, green: 0, blue: 0, alpha: 0.5).cgColor
+        oval1.fillColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.5).cgColor
         oval1.strokeColor = UIColor.red.cgColor
         oval1.lineWidth = lineWidth
         
         let oval2 = CAShapeLayer()
-        oval2.fillColor = UIColor(colorLiteralRed: 0, green: 1, blue: 0, alpha: 0.5).cgColor
+        oval2.fillColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.5).cgColor
         oval2.strokeColor = UIColor.green.cgColor
         oval2.lineWidth = lineWidth
         
         let oval3 = CAShapeLayer()
-        oval3.fillColor = UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: 0.5).cgColor
+        oval3.fillColor = UIColor(red: 0, green: 0, blue: 1, alpha: 0.5).cgColor
         oval3.strokeColor = UIColor.blue.cgColor
         oval3.lineWidth = lineWidth
         

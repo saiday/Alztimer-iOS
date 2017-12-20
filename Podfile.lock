@@ -1,5 +1,5 @@
 PODS:
-  - AFDateHelper (4.2.2)
+  - AFDateHelper (4.2.6)
   - Firebase/Core (3.15.0):
     - FirebaseAnalytics (= 3.7.0)
     - FirebaseCore (= 3.5.2)
@@ -10,32 +10,32 @@ PODS:
   - FirebaseCore (3.5.2):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.9)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
   - PureLayout (3.0.2)
-  - RxCocoa (3.3.1):
-    - RxSwift (~> 3.3)
-  - RxSwift (3.3.1)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
 
 DEPENDENCIES:
-  - AFDateHelper (~> 4.2.2)
+  - AFDateHelper (~> 4.2.6)
   - Firebase/Core (~> 3.15.0)
   - PureLayout (~> 3.0.2)
-  - RxCocoa (~> 3.3.1)
-  - RxSwift (~> 3.3.1)
+  - RxCocoa (~> 4.0.0)
+  - RxSwift (~> 4.0.0)
 
 SPEC CHECKSUMS:
-  AFDateHelper: 0f9588a442b4d7ef862568ae5d40ab883672efb5
+  AFDateHelper: f59ed3b9734c1f77873d9df39e71ac7232e302d2
   Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
-  RxCocoa: 7dcb7a1860fc9cd0e23dae67ab105fc2916670b6
-  RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
 
-PODFILE CHECKSUM: 65c5252ae6fdc27e3988a17b725c79134768ae84
+PODFILE CHECKSUM: 338cf91fc7055defc76e259eaa262231f69a65b1
 
 COCOAPODS: 1.3.1

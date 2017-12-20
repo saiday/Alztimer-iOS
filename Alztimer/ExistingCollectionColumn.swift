@@ -113,8 +113,8 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
         
         countLabel.font = UIFont.systemFont(ofSize: 13)
         countLabel.textAlignment = .center
-        countLabel.backgroundColor = UIColor(colorLiteralRed: 1, green: 1, blue: 1, alpha: 0.4)
-        
+        countLabel.backgroundColor = UIColor(red:1, green:1, blue: 1, alpha: 0.4)
+
         nameLabel.font = UIFont.systemFont(ofSize: 20)
         
         createdDateLabel.font = UIFont.systemFont(ofSize: 11)
@@ -123,7 +123,7 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
         shotButton.addTarget(self, action: #selector(shotTapped), for: .touchUpInside)
     }
     
-    func shotTapped() {
+    @objc func shotTapped() {
         if let collection = collection {
             self.delegate?.existingCollectionShotTapped(collection: collection)
         }

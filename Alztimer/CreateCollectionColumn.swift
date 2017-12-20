@@ -43,7 +43,7 @@ class CreateCollectionColumn: UIView {
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
-    func buttonTapped() {
+    @objc func buttonTapped() {
         if let delegate = self.delegate {
             delegate.createColllectionDidTapped()
         }

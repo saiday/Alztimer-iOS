@@ -158,7 +158,7 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         cancelButton.addTarget(self, action: #selector(cancelTapped), for: .touchUpInside)
     }
     
-    func shotTapped() {
+    @objc func shotTapped() {
         overlayView.isHidden = true
         if let picker = imagePickerController {
             picker.takePicture()
@@ -169,11 +169,11 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
         }
     }
     
-    func previewTapped() {
+    @objc func previewTapped() {
         overlayView.isHidden = !overlayView.isHidden
     }
     
-    func cancelTapped() {
+    @objc func cancelTapped() {
         if let picker = imagePickerController {
             picker.dismiss(animated: true, completion: nil)
         }
