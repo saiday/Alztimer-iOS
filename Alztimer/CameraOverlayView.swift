@@ -160,6 +160,8 @@ class CameraOverlayView: UIView, DeviceMotionRecorderDelegate {
     
     @objc func shotTapped() {
         overlayView.isHidden = true
+        shotButton.isEnabled = false
+        
         if let picker = imagePickerController {
             picker.takePicture()
         }

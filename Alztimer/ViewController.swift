@@ -213,6 +213,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     // MARK: ImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        picker.dismiss(animated: true, completion: nil)
+
         // TODO: store device motion
         let deviceMotion = deviceMotionRecorder.motionManager.deviceMotion
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
@@ -223,19 +225,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         print(err)
                     }
                     
-                    picker.dismiss(animated: true, completion: nil)
                 }
             } else {
-                print("no permission mdfk")
-                // FIXME: this alert is persist on screen, bad UX
-                if let existingImagePickerController = self.imagePickerContorller {
-                    existingImagePickerController.dismiss(animated: true, completion: { 
-                        [unowned self] in
-                        let alert = UIAlertController(title: NSLocalizedString("We need your permission to accss photo library", comment: ""), message: "", preferredStyle: .alert)
-                        self.present(alert, animated: true, completion: nil)
-
-                    })
-                }
+                // TODO: guide user got to app settings and dismiss
+                let alert = UIAlertController(title: NSLocalizedString("We need your permission to accss photo library", comment: ""), message: "", preferredStyle: .alert)
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
