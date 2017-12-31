@@ -58,7 +58,7 @@ class DeviceMotionMatchingView: UIView {
             arcCenter: arcCenter,
             radius: radius,
             startAngle: CGFloat(0),
-            endAngle: CGFloat(M_PI * 2),
+            endAngle: CGFloat(Double.pi * 2),
             clockwise: true)
         
         return circlePath.cgPath

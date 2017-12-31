@@ -131,7 +131,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         }
                     }
                 })
-                let name = fullName.substring(from: albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.characters.count))
+                let name = String(fullName[albumNamePrefix.index(albumNamePrefix.startIndex, offsetBy: albumNamePrefix.count)...])
                 let persistenContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
                 let managedAlbum = ManagedAlbum.fetchManagedAlbum(persistenContainer: persistenContainer, localId: albumAsset.localIdentifier)
                 let gravityData = managedAlbum?.gravityData()
@@ -190,7 +190,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         let submitAction = UIAlertAction(title: "OK", style: .default) { [unowned self](action) in
             let text = alert.textFields?.first?.text
-            if let name = text, name.characters.count > 0 {
+            if let name = text, name.count > 0 {
                 self.currentCollection = PhotoCollection(name: name)
                 self.launchCamera()
             }
