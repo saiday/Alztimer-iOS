@@ -292,18 +292,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func accessDayLapseAlbum(collection: PhotoCollection, albumFound: @escaping (PHAssetCollection, PhotoCollection) -> Void) {
-        var collection = collection
-        let fetchOptions = PHFetchOptions()
-        let albumName = kCUSTOM_ALBUM_NAME + "-" + collection.name
-        let predicate = NSPredicate(format: "title = %@", albumName)
-        fetchOptions.predicate = predicate
-        let collectionAsset = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
-        
-        if let albumAsset = collectionAsset.firstObject {
+        if let collectionUID = collection.uid,
+            let albumAsset = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [collectionUID], options: nil).firstObject {
             albumFound(albumAsset, collection)
         } else {
             // If not found, create new album
+            var collection = collection
+            let albumName = kCUSTOM_ALBUM_NAME + "-" + collection.name
             var assetCollectionPlaceholder = PHObjectPlaceholder()
+            
             PHPhotoLibrary.shared().performChanges({
                 let createAlbumRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: albumName)
                 assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
