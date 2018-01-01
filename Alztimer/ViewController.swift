@@ -22,7 +22,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var imagePickerContorller: UIImagePickerController?
     let deviceMotionRecorder = DeviceMotionRecorder()
     
-    lazy var createCollectionView: UIView = { [unowned self] in
+    lazy var createAlbumView: UIView = { [unowned self] in
         let view = CreateCollectionColumn()
         view.delegate = self
         
@@ -90,10 +90,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         stackView.autoPinEdgesToSuperviewEdges(with: .zero)
         stackView.autoMatch(.width, to: .width, of: scrollView)
         
-        view.addSubview(createCollectionView)
-        createCollectionView.autoSetDimension(.height, toSize: 50)
-        createCollectionView.autoPinEdge(.top, to: .bottom, of: scrollView)
-        createCollectionView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
+        view.addSubview(createAlbumView)
+        createAlbumView.autoSetDimension(.height, toSize: 50)
+        createAlbumView.autoPinEdge(.top, to: .bottom, of: scrollView)
+        createAlbumView.autoPinEdgesToSuperviewEdges(with: .zero, excludingEdge: .top)
     }
     
     func initCustomViews() {

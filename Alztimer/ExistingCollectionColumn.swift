@@ -29,6 +29,7 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     weak var countLabel: UILabel!
     weak var highlightImage: UIImageView!
     weak var shotButton: UIButton!
+    weak var collectionView: UICollectionView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,13 +69,13 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
         countLabel.autoPinEdge(toSuperviewEdge: .top)
         self.countLabel = countLabel
         
-        let indicator = UIImageView(forAutoLayout: ())
-        indicator.image = #imageLiteral(resourceName: "camera")
-        highlightImage.addSubview(indicator)
-        indicator.autoPinEdge(toSuperviewEdge: .right)
-        indicator.autoPinEdge(toSuperviewEdge: .bottom)
-        indicator.autoMatch(.height, to: .height, of: highlightImage, withMultiplier: 0.2)
-        indicator.autoMatch(.width, to: .height, of: indicator)
+        let cameraPic = UIImageView(forAutoLayout: ())
+        cameraPic.image = #imageLiteral(resourceName: "camera")
+        highlightImage.addSubview(cameraPic)
+        cameraPic.autoPinEdge(toSuperviewEdge: .right)
+        cameraPic.autoPinEdge(toSuperviewEdge: .bottom)
+        cameraPic.autoMatch(.height, to: .height, of: highlightImage, withMultiplier: 0.2)
+        cameraPic.autoMatch(.width, to: .height, of: cameraPic)
         
         let shotButton = UIButton(type: .system)
         contentView.addSubview(shotButton)
@@ -105,6 +106,19 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
         updatedDateLabel.autoPinEdge(toSuperviewEdge: .right)
         self.updatedDateLabel = updatedDateLabel
         
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsetsMake(5, 7, 5, 7)
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 1
+        layout.scrollDirection = .horizontal
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        contentView.addSubview(collectionView)
+        collectionView.autoPinEdge(.left, to: .right, of: highlightImage, withOffset: padding)
+        collectionView.autoPinEdge(.top, to: .bottom, of: updatedDateLabel)
+        collectionView.autoPinEdge(toSuperviewEdge: .bottom)
+        collectionView.autoPinEdge(toSuperviewEdge: .right)
+        self.collectionView = collectionView
     }
     
     func initCustomViews() {
@@ -121,6 +135,11 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
         updatedDateLabel.font = UIFont.systemFont(ofSize: 11)
         
         shotButton.addTarget(self, action: #selector(shotTapped), for: .touchUpInside)
+        
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: thumbnailCellIdentifier)
     }
     
     @objc func shotTapped() {
@@ -148,11 +167,11 @@ class ExistingCollectionColumn: UIView, UICollectionViewDelegateFlowLayout, UICo
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: thumbnailCellIdentifier, for: indexPath) as! ThumbnailCollectionViewCell
         cell.imageView.image = collection?.thumbnails?[indexPath.row]
-        
+
         return cell
     }
 }
